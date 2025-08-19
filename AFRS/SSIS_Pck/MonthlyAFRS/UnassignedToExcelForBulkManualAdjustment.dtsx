@@ -1,0 +1,1550 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/1/2008 3:56:24 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="DSHSMAA-Z073160"
+  DTS:CreatorName="DSHS\robine"
+  DTS:DTSID="{5411DDC5-5A66-4A31-A1B4-0CFEE2B0CF45}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="13.0.2150.2"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="UnassignedToExcel"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="42"
+  DTS:VersionGUID="{B31DEE0D-0789-48B7-9CD3-80E45CC428EC}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[BulkAssignmentsInsert.xlsx]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{8B99D973-2022-4683-A303-078DD965F89C}"
+      DTS:ObjectName="BulkAssignmentsInsert.xlsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=J:\Forecast Unit\AFRS_MEXP_7205\SSIS_2012\ManageBulkAssignments\BulkAssignmentsInsert.xlsx;Provider=Microsoft.ACE.OLEDB.12.0;Extended Properties=Excel 12.0 Xml;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DSHSDBOLY7206.Forecast]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{FD03BD16-5C7E-42CA-9101-0C899A236ECD}"
+      DTS:ObjectName="DSHSDBOLY7206.Forecast">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=HCADBOLY206;Initial Catalog=Forecast;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{DCF66750-4189-4CD2-A30A-D02DC7E335B8}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=J:\Forecast Unit\AFRS_MEXP_7205\SSIS_2012\ManageBulkAssignments\BulkAssignmentsInsert.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Empty Bulk Assignments Table again"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="truncate table bulkassignments"
+      DTS:DTSID="{B9F98886-3A38-41EF-9DE4-B66B7B339A34}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Empty Bulk Assignments Table again"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FD03BD16-5C7E-42CA-9101-0C899A236ECD}"
+          SQLTask:SqlStatementSource="truncate table bulkassignments" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Most likely xWalk IDSfor these unassigned rows"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="exec dbo.spsGetMostLikelyxWalkIDS"
+      DTS:DTSID="{F54B1F18-6145-40FD-8852-8DB7EAFDABFF}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Most likely xWalk IDSfor these unassigned rows"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FD03BD16-5C7E-42CA-9101-0C899A236ECD}"
+          SQLTask:SqlStatementSource="exec dbo.spsGetMostLikelyxWalkIDS" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Most likely xWalk Values for these unassigned rows"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="exec dbo.spsGetMostLikelyxWalkValues"
+      DTS:DTSID="{7C5E6F9D-0591-4F32-BDFF-10A6D54D79D4}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Most likely xWalk Values for these unassigned rows"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FD03BD16-5C7E-42CA-9101-0C899A236ECD}"
+          SQLTask:SqlStatementSource="exec dbo.spsGetMostLikelyxWalkValues" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert distinct combinations into bulk assignments from BulkManualAdjustments table"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EEF613D5-4789-4EF3-A6B6-38464A2AE452}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert distinct combinations into bulk assignments from BulkManualAdjustments table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FD03BD16-5C7E-42CA-9101-0C899A236ECD}"
+          SQLTask:SqlStatementSource="insert into  bulkassignments&#xA;select distinct biennium, programindex, allocation, subobject, subsubobject, '','','','','','','','','','','','','BulkManualAdjustmentsProcess', getdate(),'0',0 from BulkManualAdjustments" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Make sure bulk assignments table is empty"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="truncate table bulkassignments"
+      DTS:DTSID="{B144A307-D024-46DE-862A-558030764707}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Make sure bulk assignments table is empty"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FD03BD16-5C7E-42CA-9101-0C899A236ECD}"
+          SQLTask:SqlStatementSource="truncate table bulkassignments" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{00C45A90-264D-4982-8F13-2DA3977E9F68}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Put Data into the Bulk Assignments Excel Spreadsheet"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v9; (C) 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          engineThreads="5"
+          version="1">
+          <components>
+            <component
+              refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Bulk Assignments"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[BulkAssignments]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DSHSDBOLY7206.Forecast]"
+                  connectionManagerRefId="Package.ConnectionManagers[DSHSDBOLY7206.Forecast]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[Biennium]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[Biennium]"
+                      length="4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[Biennium]"
+                      name="Biennium"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[ProgramIndex]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[ProgramIndex]"
+                      length="5"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[ProgramIndex]"
+                      name="ProgramIndex"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[Allocation]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[Allocation]"
+                      length="4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[Allocation]"
+                      name="Allocation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SubObject]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[SubObject]"
+                      length="2"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SubObject]"
+                      name="SubObject"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SubSubObject]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[SubSubObject]"
+                      length="4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SubSubObject]"
+                      name="SubSubObject"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[CreateBy]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[CreateBy]"
+                      length="50"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[CreateBy]"
+                      name="CreateBy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[CreateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[CreateDate]"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[CreateDate]"
+                      name="CreateDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[BulkAssignments_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[BulkAssignments_id]"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[BulkAssignments_id]"
+                      name="BulkAssignments_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[MEG_A]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[MEG_A]"
+                      length="4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[MEG_A]"
+                      name="MEG_A"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[AFRS_MEG_Id_A]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[AFRS_MEG_Id_A]"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[AFRS_MEG_Id_A]"
+                      name="AFRS_MEG_Id_A"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SVC_A]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[SVC_A]"
+                      length="3"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SVC_A]"
+                      name="SVC_A"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[AFRS_SVC_Id_A]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[AFRS_SVC_Id_A]"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[AFRS_SVC_Id_A]"
+                      name="AFRS_SVC_Id_A"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SOF_A]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[SOF_A]"
+                      length="1"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SOF_A]"
+                      name="SOF_A"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[AFRS_SOF_Id_A]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[AFRS_SOF_Id_A]"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[AFRS_SOF_Id_A]"
+                      name="AFRS_SOF_Id_A"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[MEG_B]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[MEG_B]"
+                      length="4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[MEG_B]"
+                      name="MEG_B"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[AFRS_MEG_Id_B]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[AFRS_MEG_Id_B]"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[AFRS_MEG_Id_B]"
+                      name="AFRS_MEG_Id_B"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SVC_B]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[SVC_B]"
+                      length="3"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SVC_B]"
+                      name="SVC_B"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[AFRS_SVC_Id_B]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[AFRS_SVC_Id_B]"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[AFRS_SVC_Id_B]"
+                      name="AFRS_SVC_Id_B"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SOF_B]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[SOF_B]"
+                      length="1"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SOF_B]"
+                      name="SOF_B"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[AFRS_SOF_Id_B]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[AFRS_SOF_Id_B]"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[AFRS_SOF_Id_B]"
+                      name="AFRS_SOF_Id_B"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[MonthlyAssignment_flag]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[MonthlyAssignment_flag]"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[MonthlyAssignment_flag]"
+                      name="MonthlyAssignment_flag"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[AFRS_MonthlyAssignmentxWalk_Id]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[AFRS_MonthlyAssignmentxWalk_Id]"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[AFRS_MonthlyAssignmentxWalk_Id]"
+                      name="AFRS_MonthlyAssignmentxWalk_Id"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[Biennium]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Biennium" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[ProgramIndex]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="ProgramIndex" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[Allocation]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Allocation" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[SubObject]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="SubObject" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[SubSubObject]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="SubSubObject" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[CreateBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CreateBy" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[CreateDate]"
+                      dataType="dbTimeStamp"
+                      name="CreateDate" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[BulkAssignments_id]"
+                      dataType="i4"
+                      name="BulkAssignments_id" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[MEG_A]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="MEG_A" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[AFRS_MEG_Id_A]"
+                      dataType="i8"
+                      name="AFRS_MEG_Id_A" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[SVC_A]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SVC_A" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[AFRS_SVC_Id_A]"
+                      dataType="i8"
+                      name="AFRS_SVC_Id_A" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[SOF_A]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="SOF_A" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[AFRS_SOF_Id_A]"
+                      dataType="i8"
+                      name="AFRS_SOF_Id_A" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[MEG_B]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="MEG_B" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[AFRS_MEG_Id_B]"
+                      dataType="i8"
+                      name="AFRS_MEG_Id_B" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[SVC_B]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="SVC_B" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[AFRS_SVC_Id_B]"
+                      dataType="i8"
+                      name="AFRS_SVC_Id_B" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[SOF_B]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="SOF_B" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[AFRS_SOF_Id_B]"
+                      dataType="i8"
+                      name="AFRS_SOF_Id_B" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[MonthlyAssignment_flag]"
+                      dataType="bool"
+                      name="MonthlyAssignment_flag" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].ExternalColumns[AFRS_MonthlyAssignmentxWalk_Id]"
+                      dataType="i8"
+                      name="AFRS_MonthlyAssignmentxWalk_Id" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[BulkAssignments_id]"
+                      dataType="i4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[BulkAssignments_id]"
+                      name="BulkAssignments_id" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[Biennium]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[Biennium]"
+                      name="Biennium" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[ProgramIndex]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[ProgramIndex]"
+                      name="ProgramIndex" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[Allocation]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[Allocation]"
+                      name="Allocation" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[SubObject]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[SubObject]"
+                      name="SubObject" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[SubSubObject]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[SubSubObject]"
+                      name="SubSubObject" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[MEG_A]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[MEG_A]"
+                      name="MEG_A" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[AFRS_MEG_Id_A]"
+                      dataType="i8"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[AFRS_MEG_Id_A]"
+                      name="AFRS_MEG_Id_A" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[SVC_A]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[SVC_A]"
+                      name="SVC_A" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[AFRS_SVC_Id_A]"
+                      dataType="i8"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[AFRS_SVC_Id_A]"
+                      name="AFRS_SVC_Id_A" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[SOF_A]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[SOF_A]"
+                      name="SOF_A" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[AFRS_SOF_Id_A]"
+                      dataType="i8"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[AFRS_SOF_Id_A]"
+                      name="AFRS_SOF_Id_A" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[MEG_B]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[MEG_B]"
+                      name="MEG_B" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[AFRS_MEG_Id_B]"
+                      dataType="i8"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[AFRS_MEG_Id_B]"
+                      name="AFRS_MEG_Id_B" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[SVC_B]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[SVC_B]"
+                      name="SVC_B" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[AFRS_SVC_Id_B]"
+                      dataType="i8"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[AFRS_SVC_Id_B]"
+                      name="AFRS_SVC_Id_B" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[SOF_B]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[SOF_B]"
+                      name="SOF_B" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[AFRS_SOF_Id_B]"
+                      dataType="i8"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[AFRS_SOF_Id_B]"
+                      name="AFRS_SOF_Id_B" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[CreateBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[CreateBy]"
+                      name="CreateBy" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[CreateDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[CreateDate]"
+                      name="CreateDate" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[MonthlyAssignment_flag]"
+                      dataType="bool"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[MonthlyAssignment_flag]"
+                      name="MonthlyAssignment_flag" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[AFRS_MonthlyAssignmentxWalk_Id]"
+                      dataType="i8"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[AFRS_MonthlyAssignmentxWalk_Id]"
+                      name="AFRS_MonthlyAssignmentxWalk_Id" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Bulk Assignments Insert spreadsheet"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">'Bulk Assignments Insert$'</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[BulkAssignmentsInsert.xlsx]"
+                  connectionManagerRefId="Package.ConnectionManagers[BulkAssignmentsInsert.xlsx]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].Columns[Biennium]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="Biennium"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[Biennium]"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[Biennium]" />
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].Columns[ProgramIndex]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="ProgramIndex"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[ProgramIndex]"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[ProgramIndex]" />
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].Columns[Allocation]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="Allocation"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[Allocation]"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[Allocation]" />
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].Columns[SubObject]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="SubObject"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[SubObject]"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[SubObject]" />
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].Columns[SubSubObject]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="SubSubObject"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[SubSubObject]"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[SubSubObject]" />
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].Columns[MEG_A]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="MEG_A"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[MEG_A]"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[MEG_A]" />
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].Columns[SVC_A]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="SVC_A"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[SVC_A]"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[SVC_A]" />
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].Columns[SOF_A]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="SOF_A"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[SOF_A]"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[SOF_A]" />
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].Columns[MEG_B]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="MEG_B"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[MEG_B]"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[MEG_B]" />
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].Columns[SVC_B]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="SVC_B"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[SVC_B]"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[SVC_B]" />
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].Columns[SOF_B]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="SOF_B"
+                      externalMetadataColumnId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[SOF_B]"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[SOF_B]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[Biennium]"
+                      dataType="wstr"
+                      length="255"
+                      name="Biennium" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[ProgramIndex]"
+                      dataType="wstr"
+                      length="255"
+                      name="ProgramIndex" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[Allocation]"
+                      dataType="wstr"
+                      length="255"
+                      name="Allocation" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[SubObject]"
+                      dataType="wstr"
+                      length="255"
+                      name="SubObject" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[SubSubObject]"
+                      dataType="wstr"
+                      length="255"
+                      name="SubSubObject" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[MEG_A]"
+                      dataType="wstr"
+                      length="255"
+                      name="MEG_A" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[SVC_A]"
+                      dataType="wstr"
+                      length="255"
+                      name="SVC_A" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[SOF_A]"
+                      dataType="wstr"
+                      length="255"
+                      name="SOF_A" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[MEG_B]"
+                      dataType="wstr"
+                      length="255"
+                      name="MEG_B" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[SVC_B]"
+                      dataType="wstr"
+                      length="255"
+                      name="SVC_B" />
+                    <externalMetadataColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input].ExternalColumns[SOF_B]"
+                      dataType="wstr"
+                      length="255"
+                      name="SOF_B" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format"
+              componentClassID="DTSTransform.DataConvert.3"
+              contactInfo="Data Conversion;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Convert data to Excel Format"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Inputs[Data Conversion Input].Columns[Biennium]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Biennium"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[Biennium]" />
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Inputs[Data Conversion Input].Columns[ProgramIndex]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="ProgramIndex"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[ProgramIndex]" />
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Inputs[Data Conversion Input].Columns[Allocation]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Allocation"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[Allocation]" />
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Inputs[Data Conversion Input].Columns[SubObject]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="SubObject"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SubObject]" />
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Inputs[Data Conversion Input].Columns[SubSubObject]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="SubSubObject"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SubSubObject]" />
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Inputs[Data Conversion Input].Columns[MEG_A]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="MEG_A"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[MEG_A]" />
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Inputs[Data Conversion Input].Columns[SVC_A]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="SVC_A"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SVC_A]" />
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Inputs[Data Conversion Input].Columns[SOF_A]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="SOF_A"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SOF_A]" />
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Inputs[Data Conversion Input].Columns[MEG_B]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="MEG_B"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[MEG_B]" />
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Inputs[Data Conversion Input].Columns[SVC_B]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="SVC_B"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SVC_B]" />
+                    <inputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Inputs[Data Conversion Input].Columns[SOF_B]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="SOF_B"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SOF_B]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[Biennium]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[Biennium]"
+                      name="Biennium"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[Biennium]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[ProgramIndex]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[ProgramIndex]"
+                      name="ProgramIndex"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[ProgramIndex]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[Allocation]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[Allocation]"
+                      name="Allocation"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[Allocation]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[SubObject]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[SubObject]"
+                      name="SubObject"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SubObject]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[SubSubObject]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[SubSubObject]"
+                      name="SubSubObject"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SubSubObject]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[MEG_A]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[MEG_A]"
+                      name="MEG_A"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[MEG_A]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[SVC_A]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="3"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[SVC_A]"
+                      name="SVC_A"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SVC_A]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[SOF_A]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[SOF_A]"
+                      name="SOF_A"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SOF_A]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[MEG_B]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[MEG_B]"
+                      name="MEG_B"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[MEG_B]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[SVC_B]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="3"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[SVC_B]"
+                      name="SVC_B"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SVC_B]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[SOF_B]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output].Columns[SOF_B]"
+                      name="SOF_B"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output].Columns[SOF_B]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet.Paths[Data Conversion Output]"
+              endId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments Insert spreadsheet.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Put Data into the Bulk Assignments Excel Spreadsheet.Paths[OLE DB Source Output]"
+              endId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Convert data to Excel Format.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\Put Data into the Bulk Assignments Excel Spreadsheet\Bulk Assignments.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C5E113E8-592D-4BDA-94EE-D91FEBCF4DE0}"
+      DTS:From="Package\Insert distinct combinations into bulk assignments from BulkManualAdjustments table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Get Most likely xWalk IDSfor these unassigned rows" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{BACE535E-85ED-4897-8D51-B94626A4DE59}"
+      DTS:From="Package\Get Most likely xWalk Values for these unassigned rows"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Put Data into the Bulk Assignments Excel Spreadsheet" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{25706664-AD29-4F51-9106-600CFDB14A47}"
+      DTS:From="Package\Make sure bulk assignments table is empty"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Insert distinct combinations into bulk assignments from BulkManualAdjustments table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{8A196058-FF8A-4626-888F-B6E26E7D08F8}"
+      DTS:From="Package\Put Data into the Bulk Assignments Excel Spreadsheet"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Empty Bulk Assignments Table again" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{0BA0E966-9F2C-4839-A59E-6493C4B8F25B}"
+      DTS:From="Package\Get Most likely xWalk IDSfor these unassigned rows"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Get Most likely xWalk Values for these unassigned rows" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <NodeLayout
+          Size="195,44"
+          Id="Package\Empty Bulk Assignments Table again"
+          TopLeft="30.6698113207547,365.462264150943" />
+        <NodeLayout
+          Size="206,44"
+          Id="Package\Get Most likely xWalk IDSfor these unassigned rows"
+          TopLeft="13.7264150943396,152.669811320755" />
+        <NodeLayout
+          Size="206,44"
+          Id="Package\Get Most likely xWalk Values for these unassigned rows"
+          TopLeft="25.4622641509434,236.367924528302" />
+        <NodeLayout
+          Size="220,62"
+          Id="Package\Insert distinct combinations into bulk assignments from BulkManualAdjustments table"
+          TopLeft="5.5,69.2358490566038" />
+        <NodeLayout
+          Size="205,44"
+          Id="Package\Make sure bulk assignments table is empty"
+          TopLeft="9.72641509433959,5.5" />
+        <NodeLayout
+          Size="216,44"
+          Id="Package\Put Data into the Bulk Assignments Excel Spreadsheet"
+          TopLeft="18.4811320754717,302.254716981132" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="115.311320754717,131.122641509434">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="1.24528301886792,21.5471698113208"
+              Start="0,0"
+              End="1.24528301886792,14.0471698113208">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.7547169811321" />
+                  <mssgle:LineSegment
+                    End="1.24528301886792,10.7547169811321" />
+                  <mssgle:LineSegment
+                    End="1.24528301886792,14.0471698113208" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="128.292452830189,280.292452830189">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-2,21.9622641509434"
+              Start="0,0"
+              End="-2,14.4622641509434">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.9811320754717" />
+                  <mssgle:LineSegment
+                    End="-2,10.9811320754717" />
+                  <mssgle:LineSegment
+                    End="-2,14.4622641509434" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="112.028301886792,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="3.28301886792451,19.811320754717"
+              Start="0,0"
+              End="3.28301886792451,12.311320754717">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.9245283018868" />
+                  <mssgle:LineSegment
+                    End="3.28301886792451,9.9245283018868" />
+                  <mssgle:LineSegment
+                    End="3.28301886792451,12.311320754717" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="126.292452830189,346.179245283019">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="1.69811320754715,19.2830188679245"
+              Start="0,0"
+              End="1.69811320754715,11.7830188679245">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.62264150943395" />
+                  <mssgle:LineSegment
+                    End="1.69811320754715,9.62264150943395" />
+                  <mssgle:LineSegment
+                    End="1.69811320754715,11.7830188679245" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="116.556603773585,196.594339622642">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="11.7358490566038,39.7735849056604"
+              Start="0,0"
+              End="11.7358490566038,32.2735849056604">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.8867924528302" />
+                  <mssgle:LineSegment
+                    End="11.7358490566038,19.8867924528302" />
+                  <mssgle:LineSegment
+                    End="11.7358490566038,32.2735849056604" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="After the bulk assignments have been added&#xD;&#xA;to the xWalk assignments BulkAssignements Process), you&#xD;&#xA; need to run the leftover rows (those not previously added &#xD;&#xA;because they did not have an assignment) in the&#xD;&#xA;BulkManualAdjustments table through the assignment&#xD;&#xA;process again. This time they should get picked up.&#xD;&#xA; "
+          ParentId="Package"
+          Size="294,162"
+          Id="7a2bd8a0-dae4-4ab8-91b7-11ab543c4147"
+          TopLeft="30.6698113207547,431.688679245283">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="11.25"
+              Color="#FF080000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,2337 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/11/2014 8:41:24 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="HCAWKZ110974"
+  DTS:CreatorName="HCALAN\robine"
+  DTS:DTSID="{4ADE1964-CC9F-414E-A304-5F1541C69A6D}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5569.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="UploadCFCEligibles"
+  DTS:PackageType="5"
+  DTS:VersionBuild="55"
+  DTS:VersionGUID="{EE0BB3FC-05A0-4E53-B9A8-BC13193C31AD}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Forecast]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D2FCA3DE-7653-4CEA-BB5E-0CA38B43C7F0}"
+      DTS:ObjectName="Forecast">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=HCADBOLY206;Initial Catalog=Forecast;Provider=SQLNCLI10.1;Integrated Security=SSPI;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MOPCFCEligibles]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{B7E05F60-CF94-4818-AD46-DD0CAAA1E6A2}"
+      DTS:ObjectName="MOPCFCEligibles">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=J:\Forecast Unit\AFRS_MEXP_7205\Forecast Database and xWalk Documentation\Forecast Database and xWalk Documentation\Scrubbing\MOPeligibles1705.xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\truncate table cfceligibles"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="truncate table cfceligibles"
+      DTS:DTSID="{7979A747-11F0-4E65-AC03-0DE9A971F96E}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="truncate table cfceligibles"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D2FCA3DE-7653-4CEA-BB5E-0CA38B43C7F0}"
+          SQLTask:SqlStatementSource="truncate table cfceligibles" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Upload MOP CFC Eligibles"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{232CBE30-2B70-485A-BC06-AC5A4453733A}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Upload MOP CFC Eligibles"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{2E4CF2D0-4CE2-473F-95BB-143B898E6E4D}"
+          DTS:IncludeInDebugDump="2345"
+          DTS:Namespace="User"
+          DTS:ObjectName="ReportMonth">
+          <DTS:VariableValue
+            DTS:DataType="8">201705</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Upload MOP CFC Eligibles\CFCEligibles"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="CFCEligibles"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[CFCEligibles]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Forecast]"
+                  connectionManagerRefId="Package.ConnectionManagers[Forecast]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].Columns[lagfactor]"
+                      cachedDataType="r8"
+                      cachedName="lagfactor"
+                      externalMetadataColumnId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].ExternalColumns[LagFactor]"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[lagfactor]" />
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].Columns[CreateDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CreateDate"
+                      externalMetadataColumnId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].ExternalColumns[CreateDate]"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[CreateDate]" />
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].Columns[Copy of Create MonthOfService.MonthOfService]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="Copy of Create MonthOfService.MonthOfService"
+                      externalMetadataColumnId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].ExternalColumns[MonthOfService]"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of Create MonthOfService.MonthOfService]" />
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].Columns[CreateBy]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="CreateBy"
+                      externalMetadataColumnId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].ExternalColumns[CreateBy]"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[CreateBy]" />
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].Columns[Copy of MPACat]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Copy of MPACat"
+                      externalMetadataColumnId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].ExternalColumns[CFC_Caseload_Meg]"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of MPACat]" />
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].Columns[Copy of raw]"
+                      cachedDataType="i4"
+                      cachedName="Copy of raw"
+                      externalMetadataColumnId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].ExternalColumns[Raw]"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[Copy of raw]" />
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].Columns[ReportMonth]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="ReportMonth"
+                      externalMetadataColumnId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].ExternalColumns[ReportMonth]"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[ReportMonth]" />
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].Columns[Copy of lagged]"
+                      cachedDataType="i4"
+                      cachedName="Copy of lagged"
+                      externalMetadataColumnId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].ExternalColumns[RawLagged]"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[Copy of lagged]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].ExternalColumns[CFCEligibles_Id]"
+                      dataType="i4"
+                      name="CFCEligibles_Id" />
+                    <externalMetadataColumn
+                      refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].ExternalColumns[MonthOfService]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="MonthOfService" />
+                    <externalMetadataColumn
+                      refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].ExternalColumns[Raw]"
+                      dataType="i4"
+                      name="Raw" />
+                    <externalMetadataColumn
+                      refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].ExternalColumns[LagFactor]"
+                      dataType="numeric"
+                      name="LagFactor"
+                      precision="18"
+                      scale="15" />
+                    <externalMetadataColumn
+                      refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].ExternalColumns[CreateBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="CreateBy" />
+                    <externalMetadataColumn
+                      refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].ExternalColumns[CreateDate]"
+                      dataType="dbTimeStamp"
+                      name="CreateDate" />
+                    <externalMetadataColumn
+                      refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].ExternalColumns[CFC_Caseload_Meg]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="CFC_Caseload_Meg" />
+                    <externalMetadataColumn
+                      refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].ExternalColumns[ReportMonth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="ReportMonth" />
+                    <externalMetadataColumn
+                      refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input].ExternalColumns[RawLagged]"
+                      dataType="i4"
+                      name="RawLagged" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\CFCEligibles.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\CFCEligibles.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\CFCEligibles.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Upload MOP CFC Eligibles\Conditional Split"
+              componentClassID="{7F88F654-4E20-4D14-84F4-AF9C925D3087}"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Evaluates and directs rows in a dataset."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Upload MOP CFC Eligibles\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Conditional Split.Inputs[Conditional Split Input].Columns[MonthOfServiceIntToChange]"
+                      cachedDataType="i4"
+                      cachedName="MonthOfServiceIntToChange"
+                      lineageId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[MonthOfServiceIntToChange]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Upload MOP CFC Eligibles\Conditional Split.Outputs[MOS &lt; 10]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="MOS &lt; 10"
+                  synchronousInputId="Package\Upload MOP CFC Eligibles\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[MonthOfServiceIntToChange]} &lt; 10</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">MonthOfServiceIntToChange &lt; 10</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Upload MOP CFC Eligibles\Conditional Split.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\Upload MOP CFC Eligibles\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Upload MOP CFC Eligibles\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\Upload MOP CFC Eligibles\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Upload MOP CFC Eligibles\Create MonthOfService"
+              componentClassID="{49928E82-9C4E-49F0-AABE-3812B82707EC}"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Updates column values using expressions"
+              name="Create MonthOfService"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Upload MOP CFC Eligibles\Create MonthOfService.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Create MonthOfService.Inputs[Derived Column Input].Columns[Char YearOfService]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Char YearOfService"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[Char YearOfService]" />
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Create MonthOfService.Inputs[Derived Column Input].Columns[MonthOfServiceChar]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="MonthOfServiceChar"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[MonthOfServiceChar]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Upload MOP CFC Eligibles\Create MonthOfService.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Upload MOP CFC Eligibles\Create MonthOfService.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Create MonthOfService.Outputs[Derived Column Output].Columns[MonthOfService]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="6"
+                      lineageId="Package\Upload MOP CFC Eligibles\Create MonthOfService.Outputs[Derived Column Output].Columns[MonthOfService]"
+                      name="MonthOfService"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[Char YearOfService]} + #{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[MonthOfServiceChar]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">[Char YearOfService] + MonthOfServiceChar</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Upload MOP CFC Eligibles\Create MonthOfService.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Upload MOP CFC Eligibles\Create MonthOfService.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Create MonthOfService.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\Create MonthOfService.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Create MonthOfService.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\Create MonthOfService.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Upload MOP CFC Eligibles\Data Conversion"
+              componentClassID="{62B1106C-7DB8-4EC8-ADD6-4C664DFFC54A}"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Upload MOP CFC Eligibles\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Data Conversion.Inputs[Data Conversion Input].Columns[YearOfServiceInt]"
+                      cachedDataType="i4"
+                      cachedName="YearOfServiceInt"
+                      lineageId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[YearOfServiceInt]" />
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Data Conversion.Inputs[Data Conversion Input].Columns[MonthOfServiceIntToChange]"
+                      cachedDataType="i4"
+                      cachedName="MonthOfServiceIntToChange"
+                      lineageId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[MonthOfServiceIntToChange]" />
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Data Conversion.Inputs[Data Conversion Input].Columns[CreateBy]"
+                      cachedDataType="wstr"
+                      cachedLength="18"
+                      cachedName="CreateBy"
+                      lineageId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[CreateBy]" />
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Data Conversion.Inputs[Data Conversion Input].Columns[ReportMonth]"
+                      cachedDataType="wstr"
+                      cachedLength="6"
+                      cachedName="ReportMonth"
+                      lineageId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[ReportMonth]" />
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Data Conversion.Inputs[Data Conversion Input].Columns[Raw]"
+                      cachedDataType="r8"
+                      cachedName="Raw"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[Raw]" />
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Data Conversion.Inputs[Data Conversion Input].Columns[Lagged]"
+                      cachedDataType="r8"
+                      cachedName="Lagged"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[Lagged]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Upload MOP CFC Eligibles\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[YearOfServiceChar]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[YearOfServiceChar]"
+                      name="YearOfServiceChar"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[YearOfServiceInt]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[MonthOfServiceChar]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[MonthOfServiceChar]"
+                      name="MonthOfServiceChar"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[MonthOfServiceIntToChange]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CreateBy]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="25"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CreateBy]"
+                      name="Copy of CreateBy"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[CreateBy]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ReportMonth]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="6"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ReportMonth]"
+                      name="Copy of ReportMonth"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[ReportMonth]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of raw]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of raw]"
+                      name="Copy of raw"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[Raw]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of lagged]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of lagged]"
+                      name="Copy of lagged"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[Lagged]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Upload MOP CFC Eligibles\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Upload MOP CFC Eligibles\Data Conversion 1"
+              componentClassID="{62B1106C-7DB8-4EC8-ADD6-4C664DFFC54A}"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion 1"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Upload MOP CFC Eligibles\Data Conversion 1.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Data Conversion 1.Inputs[Data Conversion Input].Columns[MonthOfService]"
+                      cachedDataType="wstr"
+                      cachedLength="6"
+                      cachedName="MonthOfService"
+                      lineageId="Package\Upload MOP CFC Eligibles\Create MonthOfService.Outputs[Derived Column Output].Columns[MonthOfService]" />
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Data Conversion 1.Inputs[Data Conversion Input].Columns[MPACat]"
+                      cachedDataType="r8"
+                      cachedName="MPACat"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[MPACat]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Upload MOP CFC Eligibles\Data Conversion 1.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Upload MOP CFC Eligibles\Data Conversion 1.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of Create MonthOfService.MonthOfService]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="6"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of Create MonthOfService.MonthOfService]"
+                      name="Copy of Create MonthOfService.MonthOfService"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Create MonthOfService.Outputs[Derived Column Output].Columns[MonthOfService]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of MPACat]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of MPACat]"
+                      name="Copy of MPACat"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[MPACat]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Upload MOP CFC Eligibles\Data Conversion 1.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Upload MOP CFC Eligibles\Data Conversion 1.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Upload MOP CFC Eligibles\Derived Column"
+              componentClassID="{49928E82-9C4E-49F0-AABE-3812B82707EC}"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Updates column values using expressions"
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Upload MOP CFC Eligibles\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Derived Column.Inputs[Derived Column Input].Columns[mos]"
+                      cachedDataType="date"
+                      cachedName="mos"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[mos]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Upload MOP CFC Eligibles\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[CreateBy]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="18"
+                      lineageId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[CreateBy]"
+                      name="CreateBy"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"UploadCFCEligibles"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"UploadCFCEligibles"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[CreateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[CreateDate]"
+                      name="CreateDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[YearOfServiceInt]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[YearOfServiceInt]"
+                      name="YearOfServiceInt"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[YEAR](#{Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[mos]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">YEAR(mos)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[MonthOfServiceIntToChange]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[MonthOfServiceIntToChange]"
+                      name="MonthOfServiceIntToChange"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[MONTH](#{Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[mos]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">MONTH(mos)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[MonthOfServiceInt]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[MonthOfServiceInt]"
+                      name="MonthOfServiceInt"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[MONTH](#{Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[mos]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">MONTH(mos)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[ReportMonth]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="6"
+                      lineageId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[ReportMonth]"
+                      name="ReportMonth"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::ReportMonth]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::ReportMonth]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Upload MOP CFC Eligibles\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles"
+              componentClassID="{8C084929-27D1-479F-9641-ABB7CDADF1AC}"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="MOP CFC Eligibles"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">Hca_caseload_201511</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MOPCFCEligibles]"
+                  connectionManagerRefId="Package.ConnectionManagers[MOPCFCEligibles]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[mos]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].ExternalColumns[mos]"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[mos]"
+                      name="mos"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[MPAcat]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].ExternalColumns[MPAcat]"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[MPAcat]"
+                      name="MPAcat"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[Raw]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].ExternalColumns[Raw]"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[Raw]"
+                      name="Raw"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[Lagged]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].ExternalColumns[Lagged]"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[Lagged]"
+                      name="Lagged"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[LagFactor]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].ExternalColumns[LagFactor]"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[LagFactor]"
+                      name="LagFactor"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].ExternalColumns[mos]"
+                      dataType="date"
+                      name="mos" />
+                    <externalMetadataColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].ExternalColumns[MPAcat]"
+                      dataType="r8"
+                      name="MPAcat" />
+                    <externalMetadataColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].ExternalColumns[Raw]"
+                      dataType="r8"
+                      name="Raw" />
+                    <externalMetadataColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].ExternalColumns[Lagged]"
+                      dataType="r8"
+                      name="Lagged" />
+                    <externalMetadataColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].ExternalColumns[LagFactor]"
+                      dataType="r8"
+                      name="LagFactor" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Error Output].Columns[mos]"
+                      dataType="date"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Error Output].Columns[mos]"
+                      name="mos" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Error Output].Columns[MPAcat]"
+                      dataType="r8"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Error Output].Columns[MPAcat]"
+                      name="MPAcat" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Error Output].Columns[Raw]"
+                      dataType="r8"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Error Output].Columns[Raw]"
+                      name="Raw" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Error Output].Columns[Lagged]"
+                      dataType="r8"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Error Output].Columns[Lagged]"
+                      name="Lagged" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Error Output].Columns[LagFactor]"
+                      dataType="r8"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Error Output].Columns[LagFactor]"
+                      name="LagFactor" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Upload MOP CFC Eligibles\MOS &lt; 10"
+              componentClassID="{49928E82-9C4E-49F0-AABE-3812B82707EC}"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Updates column values using expressions"
+              name="MOS &lt; 10"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Upload MOP CFC Eligibles\MOS &lt; 10.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOS &lt; 10.Inputs[Derived Column Input].Columns[MonthOfServiceChar]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="MonthOfServiceChar"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[MonthOfServiceChar]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Upload MOP CFC Eligibles\MOS &lt; 10.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Upload MOP CFC Eligibles\MOS &lt; 10.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOS &lt; 10.Outputs[Derived Column Output].Columns[MonthOfServiceChar]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOS &lt; 10.Outputs[Derived Column Output].Columns[MonthOfServiceChar]"
+                      name="MonthOfServiceChar"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"0" + [SUBSTRING](#{Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[MonthOfServiceChar]},1,1)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"0" + SUBSTRING(MonthOfServiceChar,1,1)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Upload MOP CFC Eligibles\MOS &lt; 10.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Upload MOP CFC Eligibles\MOS &lt; 10.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOS &lt; 10.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOS &lt; 10.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOS &lt; 10.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOS &lt; 10.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Upload MOP CFC Eligibles\MOS GT EQ 10"
+              componentClassID="{49928E82-9C4E-49F0-AABE-3812B82707EC}"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Updates column values using expressions"
+              name="MOS GT EQ 10"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Upload MOP CFC Eligibles\MOS GT EQ 10.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOS GT EQ 10.Inputs[Derived Column Input].Columns[MonthOfServiceChar]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="MonthOfServiceChar"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[MonthOfServiceChar]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Upload MOP CFC Eligibles\MOS GT EQ 10.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Upload MOP CFC Eligibles\MOS GT EQ 10.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOS GT EQ 10.Outputs[Derived Column Output].Columns[MonthofServiceChar]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOS GT EQ 10.Outputs[Derived Column Output].Columns[MonthofServiceChar]"
+                      name="MonthofServiceChar"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[MonthOfServiceChar]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">MonthOfServiceChar</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Upload MOP CFC Eligibles\MOS GT EQ 10.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Upload MOP CFC Eligibles\MOS GT EQ 10.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOS GT EQ 10.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOS GT EQ 10.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\MOS GT EQ 10.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOS GT EQ 10.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Upload MOP CFC Eligibles\Union All"
+              componentClassID="{B594E9A8-4351-4939-891C-CFE1AB93E925}"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Merges multiple datasets."
+              name="Union All"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 1].Columns[mos]"
+                      cachedDataType="date"
+                      cachedName="mos"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[mos]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[mos]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 1].Columns[Raw]"
+                      cachedDataType="r8"
+                      cachedName="Raw"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[Raw]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[raw]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 1].Columns[Lagged]"
+                      cachedDataType="r8"
+                      cachedName="Lagged"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[Lagged]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[lagged]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 1].Columns[LagFactor]"
+                      cachedDataType="r8"
+                      cachedName="LagFactor"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[LagFactor]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[lagfactor]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 1].Columns[CreateDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CreateDate"
+                      lineageId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[CreateDate]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[CreateDate]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 1].Columns[YearOfServiceInt]"
+                      cachedDataType="i4"
+                      cachedName="YearOfServiceInt"
+                      lineageId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[YearOfServiceInt]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[YearOfService]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 1].Columns[MonthOfServiceIntToChange]"
+                      cachedDataType="i4"
+                      cachedName="MonthOfServiceIntToChange"
+                      lineageId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[MonthOfServiceIntToChange]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[MonthOfService]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 1].Columns[YearOfServiceChar]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="YearOfServiceChar"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[YearOfServiceChar]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[Char YearOfService]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 1].Columns[MonthOfServiceChar]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="MonthOfServiceChar"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[MonthOfServiceChar]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[Char MonthOfService]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 1].Columns[MonthOfServiceChar1]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="MonthOfServiceChar"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOS &lt; 10.Outputs[Derived Column Output].Columns[MonthOfServiceChar]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[MonthOfServiceChar]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 1].Columns[Copy of CreateBy]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Copy of CreateBy"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CreateBy]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[CreateBy]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 1].Columns[Copy of ReportMonth]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="Copy of ReportMonth"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ReportMonth]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[ReportMonth]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 1].Columns[Copy of raw]"
+                      cachedDataType="i4"
+                      cachedName="Copy of raw"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of raw]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[Copy of raw]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 1].Columns[Copy of lagged]"
+                      cachedDataType="i4"
+                      cachedName="Copy of lagged"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of lagged]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[Copy of lagged]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 1].Columns[MPAcat]"
+                      cachedDataType="r8"
+                      cachedName="MPAcat"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[MPAcat]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[MPACat]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 2].Columns[mos]"
+                      cachedDataType="date"
+                      cachedName="mos"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[mos]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[mos]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 2].Columns[Raw]"
+                      cachedDataType="r8"
+                      cachedName="Raw"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[Raw]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[raw]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 2].Columns[Lagged]"
+                      cachedDataType="r8"
+                      cachedName="Lagged"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[Lagged]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[lagged]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 2].Columns[LagFactor]"
+                      cachedDataType="r8"
+                      cachedName="LagFactor"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[LagFactor]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[lagfactor]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 2].Columns[CreateDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CreateDate"
+                      lineageId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[CreateDate]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[CreateDate]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 2].Columns[YearOfServiceInt]"
+                      cachedDataType="i4"
+                      cachedName="YearOfServiceInt"
+                      lineageId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[YearOfServiceInt]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[YearOfService]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 2].Columns[MonthOfServiceIntToChange]"
+                      cachedDataType="i4"
+                      cachedName="MonthOfServiceIntToChange"
+                      lineageId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[MonthOfServiceIntToChange]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[MonthOfService]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 2].Columns[YearOfServiceChar]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="YearOfServiceChar"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[YearOfServiceChar]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[Char YearOfService]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 2].Columns[MonthOfServiceChar]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="MonthOfServiceChar"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[MonthOfServiceChar]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[Char MonthOfService]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 2].Columns[MonthofServiceChar]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="MonthofServiceChar"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOS GT EQ 10.Outputs[Derived Column Output].Columns[MonthofServiceChar]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[MonthOfServiceChar]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 2].Columns[Copy of CreateBy]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Copy of CreateBy"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CreateBy]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[CreateBy]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 2].Columns[Copy of ReportMonth]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="Copy of ReportMonth"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ReportMonth]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[ReportMonth]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 2].Columns[Copy of raw]"
+                      cachedDataType="i4"
+                      cachedName="Copy of raw"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of raw]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[Copy of raw]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 2].Columns[Copy of lagged]"
+                      cachedDataType="i4"
+                      cachedName="Copy of lagged"
+                      lineageId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of lagged]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[Copy of lagged]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 2].Columns[MPAcat]"
+                      cachedDataType="r8"
+                      cachedName="MPAcat"
+                      lineageId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output].Columns[MPAcat]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[MPACat]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[mos]"
+                      dataType="date"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[mos]"
+                      name="mos" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[raw]"
+                      dataType="r8"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[raw]"
+                      name="raw" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[lagged]"
+                      dataType="r8"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[lagged]"
+                      name="lagged" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[lagfactor]"
+                      dataType="r8"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[lagfactor]"
+                      name="lagfactor" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[CreateDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[CreateDate]"
+                      name="CreateDate" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[YearOfService]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[YearOfService]"
+                      name="YearOfService" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[MonthOfService]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[MonthOfService]"
+                      name="MonthOfService" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[Char YearOfService]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[Char YearOfService]"
+                      name="Char YearOfService" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[Char MonthOfService]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[Char MonthOfService]"
+                      name="Char MonthOfService" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[MonthOfServiceChar]"
+                      dataType="wstr"
+                      length="2"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[MonthOfServiceChar]"
+                      name="MonthOfServiceChar" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[CreateBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[CreateBy]"
+                      name="CreateBy" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[ReportMonth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[ReportMonth]"
+                      name="ReportMonth" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[Copy of raw]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[Copy of raw]"
+                      name="Copy of raw" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[Copy of lagged]"
+                      dataType="i4"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[Copy of lagged]"
+                      name="Copy of lagged" />
+                    <outputColumn
+                      refId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[MPACat]"
+                      dataType="r8"
+                      lineageId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1].Columns[MPACat]"
+                      name="MPACat" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Upload MOP CFC Eligibles.Paths[Conditional Split Default Output]"
+              endId="Package\Upload MOP CFC Eligibles\MOS GT EQ 10.Inputs[Derived Column Input]"
+              name="Conditional Split Default Output"
+              startId="Package\Upload MOP CFC Eligibles\Conditional Split.Outputs[Conditional Split Default Output]" />
+            <path
+              refId="Package\Upload MOP CFC Eligibles.Paths[Data Conversion Output]"
+              endId="Package\Upload MOP CFC Eligibles\Conditional Split.Inputs[Conditional Split Input]"
+              name="Data Conversion Output"
+              startId="Package\Upload MOP CFC Eligibles\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Upload MOP CFC Eligibles.Paths[Data Conversion Output1]"
+              endId="Package\Upload MOP CFC Eligibles\CFCEligibles.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Upload MOP CFC Eligibles\Data Conversion 1.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Upload MOP CFC Eligibles.Paths[Derived Column Output]"
+              endId="Package\Upload MOP CFC Eligibles\Data Conversion.Inputs[Data Conversion Input]"
+              name="Derived Column Output"
+              startId="Package\Upload MOP CFC Eligibles\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Upload MOP CFC Eligibles.Paths[Derived Column Output1]"
+              endId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 1]"
+              name="Derived Column Output"
+              startId="Package\Upload MOP CFC Eligibles\MOS &lt; 10.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Upload MOP CFC Eligibles.Paths[Derived Column Output2]"
+              endId="Package\Upload MOP CFC Eligibles\Union All.Inputs[Union All Input 2]"
+              name="Derived Column Output"
+              startId="Package\Upload MOP CFC Eligibles\MOS GT EQ 10.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Upload MOP CFC Eligibles.Paths[Derived Column Output3]"
+              endId="Package\Upload MOP CFC Eligibles\Data Conversion 1.Inputs[Data Conversion Input]"
+              name="Derived Column Output"
+              startId="Package\Upload MOP CFC Eligibles\Create MonthOfService.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Upload MOP CFC Eligibles.Paths[Excel Source Output]"
+              endId="Package\Upload MOP CFC Eligibles\Derived Column.Inputs[Derived Column Input]"
+              name="Excel Source Output"
+              startId="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles.Outputs[Excel Source Output]" />
+            <path
+              refId="Package\Upload MOP CFC Eligibles.Paths[MOS &lt; 10]"
+              endId="Package\Upload MOP CFC Eligibles\MOS &lt; 10.Inputs[Derived Column Input]"
+              name="MOS &lt; 10"
+              startId="Package\Upload MOP CFC Eligibles\Conditional Split.Outputs[MOS &lt; 10]" />
+            <path
+              refId="Package\Upload MOP CFC Eligibles.Paths[Union All Output 1]"
+              endId="Package\Upload MOP CFC Eligibles\Create MonthOfService.Inputs[Derived Column Input]"
+              name="Union All Output 1"
+              startId="Package\Upload MOP CFC Eligibles\Union All.Outputs[Union All Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{DC196F95-6AB1-4D7E-BB72-4CE10E88C818}"
+      DTS:From="Package\truncate table cfceligibles"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Upload MOP CFC Eligibles" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <NodeLayout
+          Size="136,44"
+          Id="Package\truncate table cfceligibles"
+          TopLeft="104.367924528302,67.4245283018868" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Upload MOP CFC Eligibles"
+          TopLeft="71.3867924528302,148.066037735849" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="172.254716981132,111.349056603774">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-32.9811320754717,36.7169811320755"
+              Start="0,0"
+              End="-32.9811320754717,29.2169811320755">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.3396226415094" />
+                  <mssgle:LineSegment
+                    End="-32.9811320754717,18.3396226415094" />
+                  <mssgle:LineSegment
+                    End="-32.9811320754717,29.2169811320755" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="CHANGE THE REPORT MONTH VARIABLE!!!!!     (his is CFCs month, not our cycle.)"
+          ParentId="Package"
+          Size="528,39.2"
+          Id="0649797b-37e3-48bc-a890-89e2d4718291"
+          TopLeft="5.5,5.5">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="11.25"
+              Color="#FFFF0000"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <ConnectionManager
+    design-time-name="Package.ConnectionManagers[Forecast]">
+    <DataSourceID>Forecast</DataSourceID>
+  </ConnectionManager>
+  <TaskHost
+    design-time-name="Package\Upload MOP CFC Eligibles">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Upload MOP CFC Eligibles\Create MonthOfService"
+          TopLeft="82.2061994414537,458.925971134595" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Upload MOP CFC Eligibles\CFCEligibles"
+          TopLeft="94.7776280226137,625.907103210066" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Upload MOP CFC Eligibles\MOS GT EQ 10"
+          TopLeft="177.235849056604,320.028301886792" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles"
+          TopLeft="66.9770889585184,4.88823528553787" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Upload MOP CFC Eligibles\Data Conversion"
+          TopLeft="66.3679245283019,166.216981132075" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Upload MOP CFC Eligibles\Union All"
+          TopLeft="85.3490566037736,386.594339622642" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Upload MOP CFC Eligibles\Data Conversion 1"
+          TopLeft="101.349056603774,548.443396226415" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Upload MOP CFC Eligibles\MOS &lt; 10"
+          TopLeft="5.5,315.990566037736" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Upload MOP CFC Eligibles\Conditional Split"
+          TopLeft="67.3490566037736,237.122641509434" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Upload MOP CFC Eligibles\Derived Column"
+          TopLeft="68.4056603773585,98.3301886792453" />
+        <EdgeLayout
+          Id="Package\Upload MOP CFC Eligibles.Paths[Union All Output 1]"
+          TopLeft="151.777628022614,430.594339622642">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,28.3316315119529"
+              Start="0,0"
+              End="0,20.8316315119529">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.8316315119529" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Upload MOP CFC Eligibles.Paths[MOS &lt; 10]"
+          TopLeft="114.481132075472,281.047169811321">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-41.0943396226415,34.9433962264151"
+              Start="0,0"
+              End="-41.0943396226415,27.4433962264151">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.4716981132075" />
+                  <mssgle:LineSegment
+                    End="-41.0943396226415,17.4716981132075" />
+                  <mssgle:LineSegment
+                    End="-41.0943396226415,27.4433962264151" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-43.3853729363207,22.4716981132075,45.67640625,9.5732421875"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Upload MOP CFC Eligibles.Paths[Excel Source Output]"
+          TopLeft="134.977088958518,48.8882352855379">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="11.0285714188401,49.4419533937074"
+              Start="0,0"
+              End="11.0285714188401,41.9419533937074">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.7209766968537" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.7209766968537"
+                    Point2="0,24.7209766968537"
+                    Point3="4,24.7209766968537" />
+                  <mssgle:LineSegment
+                    End="7.0285714188401,24.7209766968537" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7.0285714188401,24.7209766968537"
+                    Point2="11.0285714188401,24.7209766968537"
+                    Point3="11.0285714188401,28.7209766968537" />
+                  <mssgle:LineSegment
+                    End="11.0285714188401,41.9419533937074" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Upload MOP CFC Eligibles.Paths[Derived Column Output3]"
+          TopLeft="150.206199441454,502.925971134595">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="19.1428571623203,45.5174250918201"
+              Start="0,0"
+              End="19.1428571623203,38.0174250918201">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.75871254591" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.75871254591"
+                    Point2="0,22.75871254591"
+                    Point3="4,22.75871254591" />
+                  <mssgle:LineSegment
+                    End="15.1428571623203,22.75871254591" />
+                  <mssgle:CubicBezierSegment
+                    Point1="15.1428571623203,22.75871254591"
+                    Point2="19.1428571623203,22.75871254591"
+                    Point3="19.1428571623203,26.75871254591" />
+                  <mssgle:LineSegment
+                    End="19.1428571623203,38.0174250918201" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Upload MOP CFC Eligibles.Paths[Derived Column Output2]"
+          TopLeft="245.122641509434,363.952830188679">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-71.1320754716981,22.6415094339623"
+              Start="0,0"
+              End="-71.1320754716981,15.1415094339623">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.3207547169811" />
+                  <mssgle:LineSegment
+                    End="-71.1320754716981,11.3207547169811" />
+                  <mssgle:LineSegment
+                    End="-71.1320754716981,15.1415094339623" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Upload MOP CFC Eligibles.Paths[Derived Column Output1]"
+          TopLeft="73.3867924528302,359.915094339623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="59.0943396226415,26.6792452830189"
+              Start="0,0"
+              End="59.0943396226415,19.1792452830189">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.3207547169811" />
+                  <mssgle:LineSegment
+                    End="59.0943396226415,13.3207547169811" />
+                  <mssgle:LineSegment
+                    End="59.0943396226415,19.1792452830189" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Upload MOP CFC Eligibles.Paths[Derived Column Output]"
+          TopLeft="146.005660377358,139.930188679245">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-11.6377358490566,26.2867924528297"
+              Start="0,0"
+              End="-11.6377358490566,18.7867924528297">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.14339622641485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.14339622641485"
+                    Point2="0,13.1433962264149"
+                    Point3="-4,13.1433962264149" />
+                  <mssgle:LineSegment
+                    End="-7.63773584905658,13.1433962264149" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-7.63773584905658,13.1433962264149"
+                    Point2="-11.6377358490566,13.1433962264149"
+                    Point3="-11.6377358490566,17.1433962264149" />
+                  <mssgle:LineSegment
+                    End="-11.6377358490566,18.7867924528297" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Upload MOP CFC Eligibles.Paths[Data Conversion Output1]"
+          TopLeft="166.063342313194,592.443396226415">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,33.4637069836509"
+              Start="0,0"
+              End="0,25.9637069836509">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.9637069836509" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Upload MOP CFC Eligibles.Paths[Data Conversion Output]"
+          TopLeft="134.254716981132,210.141509433962">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0.981132075471692,26.9811320754717"
+              Start="0,0"
+              End="0.981132075471692,19.4811320754717">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.4716981132075" />
+                  <mssgle:LineSegment
+                    End="0.981132075471692,13.4716981132075" />
+                  <mssgle:LineSegment
+                    End="0.981132075471692,19.4811320754717" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Upload MOP CFC Eligibles.Paths[Conditional Split Default Output]"
+          TopLeft="155.990566037736,281.047169811321">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="89.1320754716981,38.9811320754717"
+              Start="0,0"
+              End="89.1320754716981,31.4811320754717">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.4716981132075" />
+                  <mssgle:LineSegment
+                    End="89.1320754716981,19.4716981132075" />
+                  <mssgle:LineSegment
+                    End="89.1320754716981,31.4811320754717" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-26.047868514151,24.4716981132075,141.2278125,11.658203125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Upload MOP CFC Eligibles\CFCEligibles">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Upload MOP CFC Eligibles\MOP CFC Eligibles">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

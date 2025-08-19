@@ -1,0 +1,2251 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/19/2016 10:13:18 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="HCAWKZ129110"
+  DTS:CreatorName="HCALAN\nguyelh"
+  DTS:DTSID="{955AB3BB-B935-4AB9-92DB-79E7D206A555}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="14.0.3008.28"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="MonthlyCFCEligible_updated_for_NewMeg"
+  DTS:PackageType="5"
+  DTS:VersionBuild="415"
+  DTS:VersionGUID="{87410D41-2B44-44BD-BE4E-BE0B252E1A71}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CFC_Monthly]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{76895D1F-4004-4192-BDCB-0C7C27C0270E}"
+      DTS:ObjectName="CFC_Monthly">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=sas.LocalProvider.9.47;Location=C:\\;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MedicaidForecastServer]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{EB74E7F2-192E-43A2-9005-0476C7D823AD}"
+      DTS:ObjectName="MedicaidForecastServer">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=FRCDBAppPr;Initial Catalog=Med_Forecast;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EBDB3214-57EB-4D94-B07C-CF87D4FBD164}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="CFC_Data">
+      <DTS:VariableValue
+        DTS:DataType="8">hca_caseload_202506_out</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{29A52977-06FA-49B6-9650-FD2AD81D8D00}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="count">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{448BF071-4F4A-48C2-8494-73530A080839}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Scrub_Month">
+      <DTS:VariableValue
+        DTS:DataType="8">2524</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\combine_1866_1867_to_1860"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{663334F5-0812-49B7-A65F-3B84CDCC0B9B}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="combine_1866_1867_to_1860"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EB74E7F2-192E-43A2-9005-0476C7D823AD}"
+          SQLTask:SqlStatementSource="drop table if exists #tmp1860&#xA;select scrub_month,MOS,'1860' as Caseload_meg, sum(rawdata) as rawdata,sum(Lagged_eligible) as Lagged_eligible, max(lagfactor) as lagfactor, max(type) as type, CreateBy, getdate() as Createdate&#xA;into #tmp1860&#xA;from zxg.CFCEligibleData&#xA;where caseload_meg in (1866,1867)&#xA;group by scrub_month,MOS,CreateBy&#xA;&#xA;&#xA;&#xA;insert into zxg.CFCEligibleData (Scrub_month,MOS,Caseload_meg,Rawdata,Lagged_eligible,Lagfactor,Type,CreateBy,Createdate)&#xA;select Scrub_month,MOS,Caseload_meg,Rawdata,Lagged_eligible,Lagfactor,Type,CreateBy,Createdate&#xA;from #tmp1860&#xA;&#xA;delete &#xA;from zxg.CFCEligibleData&#xA;where caseload_meg in (1866,1867)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\If Table Imported"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{6B1C66D9-A63C-4177-A946-81439F62573D}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="If Table Imported"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"select  count(1)
+from [zxg].[CFC_ImportedTable]
+where CFC_Data  = "+"'"+ @[User::CFC_Data]+"'"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EB74E7F2-192E-43A2-9005-0476C7D823AD}"
+          SQLTask:SqlStatementSource="select  count(1)&#xA;from [zxg].[CFC_ImportedTable]&#xA;where CFC_Data  = 'hca_caseload_202506_out'"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::count" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert number of row"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{6FD512FD-921E-427C-A153-817C27513209}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert number of row"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"update [zxg].[CFC_ImportedTable]
+ set rowImported = (select count(1) from zxg.CFCEligibleData)
+where rowImported is null and  CFC_data="+"'"+ @[User::CFC_Data] +"'"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EB74E7F2-192E-43A2-9005-0476C7D823AD}"
+          SQLTask:SqlStatementSource="update [zxg].[CFC_ImportedTable]&#xA; set rowImported = (select count(1) from zxg.CFCEligibleData)&#xA;where rowImported is null and  CFC_data='hca_caseload_202506_out'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{D6BC23BE-27FE-484C-BB53-926D861E1C47}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Exec SAS"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute Process Task"
+          DTS:DTSID="{57B88501-37B2-4C33-91F6-3E34325DACAB}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteProcess.ExecuteProcess, Microsoft.SqlServer.ExecProcTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Exec SAS"
+          DTS:TaskContact="Execute Process Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:PropertyExpression
+            DTS:Name="Arguments">"-sysin C:\\MyDocu\\ForecastDocu\\_SubVersion\\AdHocSAS\\SAS2SQL__CFC_Monthly_Data_1.sas -NOSPLASH -set cfcMonthly "+  @[User::CFC_Data]</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <ExecuteProcessData
+              Executable="C:\Program Files\SASHome\SASFoundation\9.4\sas.exe"
+              Arguments="-sysin C:\MyDocu\ForecastDocu\_SubVersion\AdHocSAS\SAS2SQL__CFC_Monthly_Data_1.sas -NOSPLASH -set cfcMonthly hca_caseload_202506_out" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Record the Imported table"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{26F362EB-4DF3-4453-B3EB-7743CC07815D}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Record the Imported table"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="2">
+          <DTS:Variables />
+          <DTS:PropertyExpression
+            DTS:Name="SqlStatementSource">"insert into [zxg].[CFC_ImportedTable](CFC_Data,ImporteDate,Version)" +
+" values('"+ @[User::CFC_Data] +"'"+",cast(getdate() as date) "+","+   @[User::Scrub_Month]+"   )"</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{EB74E7F2-192E-43A2-9005-0476C7D823AD}"
+              SQLTask:SqlStatementSource="insert into [zxg].[CFC_ImportedTable](CFC_Data,ImporteDate,Version) values('hca_caseload_202506_out',cast(getdate() as date) ,2524   )" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\truncate table cfceligiblesdata"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="truncate table cfceligiblesdata"
+          DTS:DTSID="{66BA5FD9-9D36-497E-AAE5-CE2DDDBCBD22}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="truncate table cfceligiblesdata"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{EB74E7F2-192E-43A2-9005-0476C7D823AD}"
+              SQLTask:SqlStatementSource="truncate table ZXG.cfceligibledata" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SpicfcScrub_Eligibles"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{060ECDC4-A386-48FA-9FFA-94D12A300AFD}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SpicfcScrub_Eligibles"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"exec [zxg].[spicfcScrub_Eligibles] "  + "@Scrub_Month = " +  "'"+ @[User::Scrub_Month] +"'"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EB74E7F2-192E-43A2-9005-0476C7D823AD}"
+          SQLTask:SqlStatementSource="exec [zxg].[spicfcScrub_Eligibles] @Scrub_Month = '2524'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Store CFC Data"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{5365C7FA-EE38-4CBA-A784-A89E8DCCAC01}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Store CFC Data"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Store CFC Data\Derived Column"
+              componentClassID="DTSTransform.DerivedColumn.3"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Store CFC Data\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Store CFC Data\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Store CFC Data\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Store CFC Data\Derived Column.Outputs[Derived Column Output].Columns[Version]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Store CFC Data\Derived Column.Outputs[Derived Column Output].Columns[Version]"
+                      name="Version"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,4,1252)@[User::Scrub_Month]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,4,1252)@[User::Scrub_Month]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Store CFC Data\Derived Column.Outputs[Derived Column Output].Columns[SourceFileName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Store CFC Data\Derived Column.Outputs[Derived Column Output].Columns[SourceFileName]"
+                      name="SourceFileName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,50,1252)@[User::CFC_Data]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,50,1252)@[User::CFC_Data]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Store CFC Data\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Store CFC Data\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Store CFC Data\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Store CFC Data\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Store CFC Data\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Store CFC Data\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Store CFC Data\OLE DB Destination"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[zxg].[CFCEligibleDataStore]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Store CFC Data\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MedicaidForecastServer]"
+                  connectionManagerRefId="Package.ConnectionManagers[MedicaidForecastServer]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Scrub_month]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="Scrub_month"
+                      externalMetadataColumnId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Scrub_month]"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Scrub_month]" />
+                    <inputColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MOS]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="MOS"
+                      externalMetadataColumnId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MOS]"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[MOS]" />
+                    <inputColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Caseload_meg]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Caseload_meg"
+                      externalMetadataColumnId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Caseload_meg]"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Caseload_meg]" />
+                    <inputColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Rawdata]"
+                      cachedDataType="r8"
+                      cachedName="Rawdata"
+                      externalMetadataColumnId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Rawdata]"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Rawdata]" />
+                    <inputColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Lagged_eligible]"
+                      cachedDataType="r8"
+                      cachedName="Lagged_eligible"
+                      externalMetadataColumnId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Lagged_eligible]"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Lagged_eligible]" />
+                    <inputColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Lagfactor]"
+                      cachedDataType="numeric"
+                      cachedName="Lagfactor"
+                      cachedPrecision="18"
+                      cachedScale="15"
+                      externalMetadataColumnId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Lagfactor]"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Lagfactor]" />
+                    <inputColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Type]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Type"
+                      externalMetadataColumnId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Type]"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Type]" />
+                    <inputColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CreateBy]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="CreateBy"
+                      externalMetadataColumnId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CreateBy]"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreateBy]" />
+                    <inputColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Createdate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Createdate"
+                      externalMetadataColumnId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Createdate]"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Createdate]" />
+                    <inputColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Version]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Version"
+                      externalMetadataColumnId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Version]"
+                      lineageId="Package\Store CFC Data\Derived Column.Outputs[Derived Column Output].Columns[Version]" />
+                    <inputColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SourceFileName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="SourceFileName"
+                      externalMetadataColumnId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SoruceTableName]"
+                      lineageId="Package\Store CFC Data\Derived Column.Outputs[Derived Column Output].Columns[SourceFileName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Scrub_month]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="Scrub_month" />
+                    <externalMetadataColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MOS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="MOS" />
+                    <externalMetadataColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Caseload_meg]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Caseload_meg" />
+                    <externalMetadataColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Rawdata]"
+                      dataType="r8"
+                      name="Rawdata" />
+                    <externalMetadataColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Lagged_eligible]"
+                      dataType="r8"
+                      name="Lagged_eligible" />
+                    <externalMetadataColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Lagfactor]"
+                      dataType="numeric"
+                      name="Lagfactor"
+                      precision="18"
+                      scale="15" />
+                    <externalMetadataColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Type" />
+                    <externalMetadataColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CreateBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="CreateBy" />
+                    <externalMetadataColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Createdate]"
+                      dataType="dbTimeStamp"
+                      name="Createdate" />
+                    <externalMetadataColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SoruceTableName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="SoruceTableName" />
+                    <externalMetadataColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Version]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Version" />
+                    <externalMetadataColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Id]"
+                      dataType="i4"
+                      name="Id" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Store CFC Data\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Store CFC Data\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Store CFC Data\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Store CFC Data\OLE DB Source"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[zxg].[CFCEligibleData]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Store CFC Data\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MedicaidForecastServer]"
+                  connectionManagerRefId="Package.ConnectionManagers[MedicaidForecastServer]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Scrub_month]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Scrub_month]"
+                      length="6"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Scrub_month]"
+                      name="Scrub_month"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[MOS]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MOS]"
+                      length="6"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[MOS]"
+                      name="MOS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Caseload_meg]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Caseload_meg]"
+                      length="4"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Caseload_meg]"
+                      name="Caseload_meg"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Rawdata]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Rawdata]"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Rawdata]"
+                      name="Rawdata"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Lagged_eligible]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Lagged_eligible]"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Lagged_eligible]"
+                      name="Lagged_eligible"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Lagfactor]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Lagfactor]"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Lagfactor]"
+                      name="Lagfactor"
+                      precision="18"
+                      scale="15"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Type]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Type]"
+                      length="1"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Type]"
+                      name="Type"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreateBy]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CreateBy]"
+                      length="25"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreateBy]"
+                      name="CreateBy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Createdate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Createdate]"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].Columns[Createdate]"
+                      name="Createdate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Scrub_month]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="Scrub_month" />
+                    <externalMetadataColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MOS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="MOS" />
+                    <externalMetadataColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Caseload_meg]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Caseload_meg" />
+                    <externalMetadataColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Rawdata]"
+                      dataType="r8"
+                      name="Rawdata" />
+                    <externalMetadataColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Lagged_eligible]"
+                      dataType="r8"
+                      name="Lagged_eligible" />
+                    <externalMetadataColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Lagfactor]"
+                      dataType="numeric"
+                      name="Lagfactor"
+                      precision="18"
+                      scale="15" />
+                    <externalMetadataColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Type" />
+                    <externalMetadataColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CreateBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="CreateBy" />
+                    <externalMetadataColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Createdate]"
+                      dataType="dbTimeStamp"
+                      name="Createdate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Scrub_month]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Scrub_month]"
+                      name="Scrub_month" />
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MOS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MOS]"
+                      name="MOS" />
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Caseload_meg]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Caseload_meg]"
+                      name="Caseload_meg" />
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Rawdata]"
+                      dataType="r8"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Rawdata]"
+                      name="Rawdata" />
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Lagged_eligible]"
+                      dataType="r8"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Lagged_eligible]"
+                      name="Lagged_eligible" />
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Lagfactor]"
+                      dataType="numeric"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Lagfactor]"
+                      name="Lagfactor"
+                      precision="18"
+                      scale="15" />
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Type]"
+                      name="Type" />
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CreateBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CreateBy]"
+                      name="CreateBy" />
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Createdate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Createdate]"
+                      name="Createdate" />
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Store CFC Data.Paths[Derived Column Output]"
+              endId="Package\Store CFC Data\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Store CFC Data\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Store CFC Data.Paths[OLE DB Source Output]"
+              endId="Package\Store CFC Data\Derived Column.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\Store CFC Data\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Upload Monthly CFC Eligibles"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{DAC2F383-E22D-4575-A9CA-EDC30C4CA59E}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Upload Monthly CFC Eligibles"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Upload Monthly CFC Eligibles\cfc_monthly"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="cfc_monthly"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">CFC_DAT</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CFC_Monthly]"
+                  connectionManagerRefId="Package.ConnectionManagers[CFC_Monthly]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[mos]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].ExternalColumns[mos]"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[mos]"
+                      name="mos"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[RawData]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].ExternalColumns[RawData]"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[RawData]"
+                      name="RawData"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[Lagged_Eligible]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].ExternalColumns[Lagged_Eligible]"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[Lagged_Eligible]"
+                      name="Lagged_Eligible"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[LagFactor]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].ExternalColumns[LagFactor]"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[LagFactor]"
+                      name="LagFactor"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[Type]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].ExternalColumns[Type]"
+                      length="1"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[Type]"
+                      name="Type"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[Caseload_MEG]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].ExternalColumns[Caseload_MEG]"
+                      length="4"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[Caseload_MEG]"
+                      name="Caseload_MEG"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[mos_text]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].ExternalColumns[mos_text]"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[mos_text]"
+                      name="mos_text"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].ExternalColumns[mos]"
+                      dataType="r8"
+                      name="mos" />
+                    <externalMetadataColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].ExternalColumns[RawData]"
+                      dataType="r8"
+                      name="RawData" />
+                    <externalMetadataColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].ExternalColumns[Lagged_Eligible]"
+                      dataType="r8"
+                      name="Lagged_Eligible" />
+                    <externalMetadataColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].ExternalColumns[LagFactor]"
+                      dataType="r8"
+                      name="LagFactor" />
+                    <externalMetadataColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].ExternalColumns[Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Type" />
+                    <externalMetadataColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].ExternalColumns[Caseload_MEG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Caseload_MEG" />
+                    <externalMetadataColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].ExternalColumns[mos_text]"
+                      dataType="r8"
+                      name="mos_text" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Error Output].Columns[Caseload_MEG]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Error Output].Columns[Caseload_MEG]"
+                      name="Caseload_MEG" />
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Error Output].Columns[mos]"
+                      dataType="r8"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Error Output].Columns[mos]"
+                      name="mos" />
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Error Output].Columns[RawData]"
+                      dataType="r8"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Error Output].Columns[RawData]"
+                      name="RawData" />
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Error Output].Columns[Lagged_Eligible]"
+                      dataType="r8"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Error Output].Columns[Lagged_Eligible]"
+                      name="Lagged_Eligible" />
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Error Output].Columns[LagFactor]"
+                      dataType="r8"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Error Output].Columns[LagFactor]"
+                      name="LagFactor" />
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Error Output].Columns[Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Error Output].Columns[Type]"
+                      name="Type" />
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Error Output].Columns[mos_text]"
+                      dataType="r8"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Error Output].Columns[mos_text]"
+                      name="mos_text" />
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Upload Monthly CFC Eligibles\Data Conversion"
+              componentClassID="DTSTransform.DataConvert.3"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Upload Monthly CFC Eligibles\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\Data Conversion.Inputs[Data Conversion Input].Columns[CreateBy]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="CreateBy"
+                      lineageId="Package\Upload Monthly CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[CreateBy]" />
+                    <inputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\Data Conversion.Inputs[Data Conversion Input].Columns[Scrub_Month]"
+                      cachedDataType="wstr"
+                      cachedLength="6"
+                      cachedName="Scrub_Month"
+                      lineageId="Package\Upload Monthly CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[Scrub_Month]" />
+                    <inputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\Data Conversion.Inputs[Data Conversion Input].Columns[Caseload_MEG]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Caseload_MEG"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[Caseload_MEG]" />
+                    <inputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\Data Conversion.Inputs[Data Conversion Input].Columns[Type]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Type"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[Type]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Upload Monthly CFC Eligibles\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Upload Monthly CFC Eligibles\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CreateBy]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="25"
+                      lineageId="Package\Upload Monthly CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CreateBy]"
+                      name="Copy of CreateBy"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload Monthly CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[CreateBy]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Scrub_Month]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="6"
+                      lineageId="Package\Upload Monthly CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Scrub_Month]"
+                      name="Copy of Scrub_Month"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload Monthly CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[Scrub_Month]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Caseload_MEG]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Upload Monthly CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Caseload_MEG]"
+                      name="Copy of Caseload_MEG"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[Caseload_MEG]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Type]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\Upload Monthly CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Type]"
+                      name="Copy of Type"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[Type]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Upload Monthly CFC Eligibles\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Upload Monthly CFC Eligibles\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upload Monthly CFC Eligibles\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upload Monthly CFC Eligibles\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Upload Monthly CFC Eligibles\Derived Column"
+              componentClassID="DTSTransform.DerivedColumn.3"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Upload Monthly CFC Eligibles\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Upload Monthly CFC Eligibles\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Upload Monthly CFC Eligibles\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[CreateBy]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="25"
+                      lineageId="Package\Upload Monthly CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[CreateBy]"
+                      name="CreateBy"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"UploadCFCMonthlyEligibles"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"UploadCFCMonthlyEligibles"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[CreateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Upload Monthly CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[CreateDate]"
+                      name="CreateDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[Scrub_Month]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="6"
+                      lineageId="Package\Upload Monthly CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[Scrub_Month]"
+                      name="Scrub_Month"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"SM" + @[User::Scrub_Month]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"SM" + @[User::Scrub_Month]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Upload Monthly CFC Eligibles\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Upload Monthly CFC Eligibles\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upload Monthly CFC Eligibles\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upload Monthly CFC Eligibles\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[zxg].[CFCEligibleData]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MedicaidForecastServer]"
+                  connectionManagerRefId="Package.ConnectionManagers[MedicaidForecastServer]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Caseload_MEG]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Caseload_MEG"
+                      externalMetadataColumnId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Caseload_meg]"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[Caseload_MEG]" />
+                    <inputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RawData]"
+                      cachedDataType="r8"
+                      cachedName="RawData"
+                      externalMetadataColumnId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Rawdata]"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[RawData]" />
+                    <inputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Lagged_Eligible]"
+                      cachedDataType="r8"
+                      cachedName="Lagged_Eligible"
+                      externalMetadataColumnId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Lagged_eligible]"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[Lagged_Eligible]" />
+                    <inputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LagFactor]"
+                      cachedDataType="r8"
+                      cachedName="LagFactor"
+                      externalMetadataColumnId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Lagfactor]"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[LagFactor]" />
+                    <inputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Type]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Type"
+                      externalMetadataColumnId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Type]"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[Type]" />
+                    <inputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CreateDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CreateDate"
+                      externalMetadataColumnId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Createdate]"
+                      lineageId="Package\Upload Monthly CFC Eligibles\Derived Column.Outputs[Derived Column Output].Columns[CreateDate]" />
+                    <inputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of Scrub_Month]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="Copy of Scrub_Month"
+                      externalMetadataColumnId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Scrub_month]"
+                      lineageId="Package\Upload Monthly CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Scrub_Month]" />
+                    <inputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of CreateBy]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Copy of CreateBy"
+                      externalMetadataColumnId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CreateBy]"
+                      lineageId="Package\Upload Monthly CFC Eligibles\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CreateBy]" />
+                    <inputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[mos_text]"
+                      cachedDataType="r8"
+                      cachedName="mos_text"
+                      externalMetadataColumnId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MOS]"
+                      lineageId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output].Columns[mos_text]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Scrub_month]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="Scrub_month" />
+                    <externalMetadataColumn
+                      refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MOS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="MOS" />
+                    <externalMetadataColumn
+                      refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Caseload_meg]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Caseload_meg" />
+                    <externalMetadataColumn
+                      refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Rawdata]"
+                      dataType="r8"
+                      name="Rawdata" />
+                    <externalMetadataColumn
+                      refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Lagged_eligible]"
+                      dataType="r8"
+                      name="Lagged_eligible" />
+                    <externalMetadataColumn
+                      refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Lagfactor]"
+                      dataType="numeric"
+                      name="Lagfactor"
+                      precision="18"
+                      scale="15" />
+                    <externalMetadataColumn
+                      refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Type" />
+                    <externalMetadataColumn
+                      refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CreateBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="CreateBy" />
+                    <externalMetadataColumn
+                      refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Createdate]"
+                      dataType="dbTimeStamp"
+                      name="Createdate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Upload Monthly CFC Eligibles.Paths[Data Conversion Output]"
+              endId="Package\Upload Monthly CFC Eligibles\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Upload Monthly CFC Eligibles\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Upload Monthly CFC Eligibles.Paths[Derived Column Output]"
+              endId="Package\Upload Monthly CFC Eligibles\Data Conversion.Inputs[Data Conversion Input]"
+              name="Derived Column Output"
+              startId="Package\Upload Monthly CFC Eligibles\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Upload Monthly CFC Eligibles.Paths[OLE DB Source Output]"
+              endId="Package\Upload Monthly CFC Eligibles\Derived Column.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\Upload Monthly CFC Eligibles\cfc_monthly.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ZXG2DBO"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{1C6BF0F1-76ED-4C84-AD7B-9E1365B7AB8F}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ZXG2DBO"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EB74E7F2-192E-43A2-9005-0476C7D823AD}"
+          SQLTask:SqlStatementSource="truncate table [dbo].[CFCEligibleData]&#xA;insert into [dbo].[CFCEligibleData]([Scrub_month],[MOS],[Caseload_meg],[Rawdata],[Lagged_eligible],[Lagfactor],[Type],[CreateBy],[Createdate])&#xA;select [Scrub_month],[MOS],[Caseload_meg],[Rawdata],[Lagged_eligible],[Lagfactor],[Type],[CreateBy],[Createdate]&#xA;from  zxg.cfceligibledata&#xA;&#xA;&#xA;&#xA;--## 32&#xA;Truncate table [dbo].[cfcscrub_eligibles]&#xA;insert into [dbo].[cfcscrub_eligibles] ([scrub_month],[month_of_service],[caseload_meg],[rawdata],[rawdatalagged],[lagfactor],[type],&#xA;                                        [mccount],[ffscount],[forecast_caseload_meg],[createdate]&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;   )&#xA;select [scrub_month],[month_of_service],[caseload_meg],[rawdata],[rawdatalagged],[lagfactor],[type],[mccount],[ffscount],[forecast_caseload_meg],[createdate]&#xA;from [zxg].[cfcscrub_eligibles] " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{59CE0EF0-D1BF-4D00-B838-B869F8303B92}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[User::count]==0"
+      DTS:From="Package\If Table Imported"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Sequence Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{E4D45C92-A67E-4CB7-9EC2-B1BE96CF468F}"
+      DTS:From="Package\Upload Monthly CFC Eligibles"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Store CFC Data" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{0ED62DAD-B60A-41AB-8C8F-3702C7E9036A}"
+      DTS:From="Package\SpicfcScrub_Eligibles"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\ZXG2DBO" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{2004493A-9447-436A-8B43-BB56EA542C74}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Upload Monthly CFC Eligibles" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{5732C7BA-C779-4183-8098-A4D9D27D2873}"
+      DTS:From="Package\Store CFC Data"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Insert number of row" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{08C112CD-E08F-49FD-8022-A1D09B229E11}"
+      DTS:From="Package\Insert number of row"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\combine_1866_1867_to_1860" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{B77C2B7D-EB21-4710-8F6F-B52B31259CAB}"
+      DTS:From="Package\combine_1866_1867_to_1860"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\SpicfcScrub_Eligibles" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="221,42"
+          Id="Package\combine_1866_1867_to_1860"
+          TopLeft="887,430" />
+        <NodeLayout
+          Size="162,42"
+          Id="Package\If Table Imported"
+          TopLeft="222,33" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Insert number of row"
+          TopLeft="876,333" />
+        <NodeLayout
+          Size="122,42"
+          Id="Package\Sequence Container\Exec SAS"
+          TopLeft="159,11" />
+        <NodeLayout
+          Size="203,42"
+          Id="Package\Sequence Container\Record the Imported table"
+          TopLeft="267,75" />
+        <NodeLayout
+          Size="219,42"
+          Id="Package\Sequence Container\truncate table cfceligiblesdata"
+          TopLeft="10.0000011580331,74.400000875136" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="482,224"
+          Size="482,267"
+          Id="Package\Sequence Container"
+          TopLeft="60,146" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\SpicfcScrub_Eligibles"
+          TopLeft="622,362" />
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Store CFC Data"
+          TopLeft="926,211" />
+        <NodeLayout
+          Size="215,42"
+          Id="Package\Upload Monthly CFC Eligibles"
+          TopLeft="612.857143927594,212.211766756447" />
+        <NodeLayout
+          Size="125,42"
+          Id="Package\ZXG2DBO"
+          TopLeft="646,461" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="302,75">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,71"
+              Start="0,0"
+              End="0,63.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,63.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,23.75,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="827.857143927594,232.605883378223">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="98.1428560724059,0"
+              Start="0,0"
+              End="90.6428560724059,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="90.6428560724059,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="709.5,404">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,57"
+              Start="0,0"
+              End="0,49.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="542,279.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="70.8571439275941,-46.288233243553"
+              Start="0,0"
+              End="63.3571439275941,-46.288233243553">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="31.428571963797,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="31.428571963797,0"
+                    Point2="35.428571963797,0"
+                    Point3="35.428571963797,-4" />
+                  <mssgle:LineSegment
+                    End="35.428571963797,-42.288233243553" />
+                  <mssgle:CubicBezierSegment
+                    Point1="35.428571963797,-42.288233243553"
+                    Point2="35.428571963797,-46.288233243553"
+                    Point3="39.428571963797,-46.288233243553" />
+                  <mssgle:LineSegment
+                    End="63.3571439275941,-46.288233243553" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="1001.5,253">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-35.5,80"
+              Start="0,0"
+              End="-35.5,72.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,36"
+                    Point2="0,40"
+                    Point3="-4,40" />
+                  <mssgle:LineSegment
+                    End="-31.5,40" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-31.5,40"
+                    Point2="-35.5,40"
+                    Point3="-35.5,44" />
+                  <mssgle:LineSegment
+                    End="-35.5,72.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="966,375">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="31.5,55"
+              Start="0,0"
+              End="31.5,47.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.5"
+                    Point2="0,27.5"
+                    Point3="4,27.5" />
+                  <mssgle:LineSegment
+                    End="27.5,27.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="27.5,27.5"
+                    Point2="31.5,27.5"
+                    Point3="31.5,31.5" />
+                  <mssgle:LineSegment
+                    End="31.5,47.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="962,430">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-223.333333333333,-26"
+              Start="0,0"
+              End="-223.333333333333,-18.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-8.97133765940921" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-8.97133765940921"
+                    Point2="0,-12.9713376594092"
+                    Point3="-4,-12.9713376594092" />
+                  <mssgle:LineSegment
+                    End="-219.333333333333,-12.9713376594092" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-219.333333333333,-12.9713376594092"
+                    Point2="-223.333333333333,-12.9713376594092"
+                    Point3="-223.333333333333,-16.9713376594092" />
+                  <mssgle:LineSegment
+                    End="-223.333333333333,-18.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Store CFC Data">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Store CFC Data\OLE DB Source"
+          TopLeft="198,80" />
+        <NodeLayout
+          Size="248,42"
+          Id="Package\Store CFC Data\Derived Column"
+          TopLeft="180,232" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Store CFC Data\OLE DB Destination"
+          TopLeft="353,386" />
+        <EdgeLayout
+          Id="Package\Store CFC Data.Paths[OLE DB Source Output]"
+          TopLeft="273,122">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="31,110"
+              Start="0,0"
+              End="31,102.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,51"
+                    Point2="0,55"
+                    Point3="4,55" />
+                  <mssgle:LineSegment
+                    End="27,55" />
+                  <mssgle:CubicBezierSegment
+                    Point1="27,55"
+                    Point2="31,55"
+                    Point3="31,59" />
+                  <mssgle:LineSegment
+                    End="31,102.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Store CFC Data.Paths[Derived Column Output]"
+          TopLeft="304,274">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="134.5,112"
+              Start="0,0"
+              End="134.5,104.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,52"
+                    Point2="0,56"
+                    Point3="4,56" />
+                  <mssgle:LineSegment
+                    End="130.5,56" />
+                  <mssgle:CubicBezierSegment
+                    Point1="130.5,56"
+                    Point2="134.5,56"
+                    Point3="134.5,60" />
+                  <mssgle:LineSegment
+                    End="134.5,104.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Store CFC Data\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Store CFC Data\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Upload Monthly CFC Eligibles">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Upload Monthly CFC Eligibles\OLE DB Destination"
+          TopLeft="472.000001089913,311.329412296652" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Upload Monthly CFC Eligibles\Derived Column"
+          TopLeft="506,138" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Upload Monthly CFC Eligibles\Data Conversion"
+          TopLeft="487.000001089913,213.329412296652" />
+        <NodeLayout
+          Size="136,42"
+          Id="Package\Upload Monthly CFC Eligibles\cfc_monthly"
+          TopLeft="494.000001089913,52.3294122966516" />
+        <EdgeLayout
+          Id="Package\Upload Monthly CFC Eligibles.Paths[Derived Column Output]"
+          TopLeft="583,180">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-17.999998910087,33.329412296652"
+              Start="0,0"
+              End="-17.999998910087,25.829412296652">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.664706148326" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.664706148326"
+                    Point2="0,16.664706148326"
+                    Point3="-4,16.664706148326" />
+                  <mssgle:LineSegment
+                    End="-13.999998910087,16.664706148326" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-13.999998910087,16.664706148326"
+                    Point2="-17.999998910087,16.664706148326"
+                    Point3="-17.999998910087,20.664706148326" />
+                  <mssgle:LineSegment
+                    End="-17.999998910087,25.829412296652" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Upload Monthly CFC Eligibles.Paths[Data Conversion Output]"
+          TopLeft="561.250001089913,255.329412296652">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56"
+              Start="0,0"
+              End="0,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Upload Monthly CFC Eligibles.Paths[OLE DB Source Output]"
+          TopLeft="562.000001089913,94.3294122966516">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="20.999998910087,43.6705877033484"
+              Start="0,0"
+              End="20.999998910087,36.1705877033484">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.8352938516742" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.8352938516742"
+                    Point2="0,21.8352938516742"
+                    Point3="4,21.8352938516742" />
+                  <mssgle:LineSegment
+                    End="16.999998910087,21.8352938516742" />
+                  <mssgle:CubicBezierSegment
+                    Point1="16.999998910087,21.8352938516742"
+                    Point2="20.999998910087,21.8352938516742"
+                    Point3="20.999998910087,25.8352938516742" />
+                  <mssgle:LineSegment
+                    End="20.999998910087,36.1705877033484" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Upload Monthly CFC Eligibles\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Upload Monthly CFC Eligibles\cfc_monthly">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

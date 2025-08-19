@@ -1,0 +1,277 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/26/2008 1:37:32 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="DSHSMAA-Z073160"
+  DTS:CreatorName="DSHS\robine"
+  DTS:DTSID="{3D1DD36F-2D2D-47C7-A701-F3DCBE1AFFCA}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5569.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="RunBulkAssignmentsInsert"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="42"
+  DTS:VersionGUID="{55BC07A2-909D-4216-880C-83818504B58D}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[InsertBulkAssignments 2.dtsx]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{7CDA45FE-209A-4B42-920C-C5CDA2FBE016}"
+      DTS:ObjectName="InsertBulkAssignments 2.dtsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="J:\Forecast Unit\AFRS_MEXP_7205\SSIS_2012\ManageBulkAssignments\ManageBulkAssignments\InsertBulkAssignments 2.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[InsertBulkAssignments 3.dtsx]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{A92B8848-D0B2-46E3-88B8-29063C72E09D}"
+      DTS:ObjectName="InsertBulkAssignments 3.dtsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="J:\Forecast Unit\AFRS_MEXP_7205\SSIS_2012\ManageBulkAssignments\ManageBulkAssignments\InsertBulkAssignments 3.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[InsertBulkAssignments.dtsx]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{19CD772C-45AA-4C36-82CF-C6152C5B526B}"
+      DTS:ObjectName="InsertBulkAssignments.dtsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="J:\Forecast Unit\AFRS_MEXP_7205\SSIS_2012\ManageBulkAssignments\BulkAssignmentsInsert.xlsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[InsertCleanup.dtsx]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{CC2DB92A-FC53-443D-AB6B-46F73A2992FF}"
+      DTS:ObjectName="InsertCleanup.dtsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="\\dshsfloly7002\JDrive\Forecast Unit\AFRS_MEXP_7205\SSIS_2012\ManageBulkAssignments\ManageBulkAssignments\InsertCleanup.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Clean Up after Inserting Bulk Assignments (InsertCleanup)"
+      DTS:CreationName="SSIS.ExecutePackageTask.3"
+      DTS:Description="Truncate work tables"
+      DTS:DTSID="{BBF9ADC4-8437-47FA-997A-CC725A17DB83}"
+      DTS:ExecutableType="SSIS.ExecutePackageTask.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Clean Up after Inserting Bulk Assignments (InsertCleanup)"
+      DTS:TaskContact="Executes DTS packages;Microsoft Corporation; Microsoft SQL Server v9; (C) 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <Connection>{CC2DB92A-FC53-443D-AB6B-46F73A2992FF}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert Bulk Assignments (InsertBulkAssignments) 3"
+      DTS:CreationName="SSIS.ExecutePackageTask.3"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{73C9395D-62A4-4E7E-B30A-FF09CA284F0A}"
+      DTS:ExecutableType="SSIS.ExecutePackageTask.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert Bulk Assignments (InsertBulkAssignments) 3"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <Connection>{A92B8848-D0B2-46E3-88B8-29063C72E09D}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Make sure things were cleaned up after last run (InsertCleanup)"
+      DTS:CreationName="SSIS.ExecutePackageTask.3"
+      DTS:Description="Truncate work tables"
+      DTS:DTSID="{236ded3a-74e3-4389-841f-8acc0a98581e}"
+      DTS:ExecutableType="SSIS.ExecutePackageTask.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Make sure things were cleaned up after last run (InsertCleanup)"
+      DTS:TaskContact="Executes DTS packages;Microsoft Corporation; Microsoft SQL Server v9; (C) 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <Connection>{CC2DB92A-FC53-443D-AB6B-46F73A2992FF}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{3A94CDDB-C95E-4397-B654-E24D79032546}"
+      DTS:From="Package\Insert Bulk Assignments (InsertBulkAssignments) 3"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Clean Up after Inserting Bulk Assignments (InsertCleanup)" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{C642B64C-A009-4E21-90FE-4380FEA489DD}"
+      DTS:From="Package\Make sure things were cleaned up after last run (InsertCleanup)"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Insert Bulk Assignments (InsertBulkAssignments) 3" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <NodeLayout
+          Size="197,61"
+          Id="Package\Clean Up after Inserting Bulk Assignments (InsertCleanup)"
+          TopLeft="40.5754716981132,441.783018867925" />
+        <NodeLayout
+          Size="322,42"
+          Id="Package\Insert Bulk Assignments (InsertBulkAssignments) 3"
+          TopLeft="75,276.611764714462" />
+        <NodeLayout
+          Size="382,42"
+          Id="Package\Make sure things were cleaned up after last run (InsertCleanup)"
+          TopLeft="15.5,167.952830188679" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="236,318.611764714462">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-96.9245283018868,123.171254153463"
+              Start="0,0"
+              End="-96.9245283018868,115.671254153463">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.5856270767315" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,57.5856270767315"
+                    Point2="0,61.5856270767315"
+                    Point3="-4,61.5856270767315" />
+                  <mssgle:LineSegment
+                    End="-92.9245283018868,61.5856270767315" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-92.9245283018868,61.5856270767315"
+                    Point2="-96.9245283018868,61.5856270767315"
+                    Point3="-96.9245283018868,65.5856270767315" />
+                  <mssgle:LineSegment
+                    End="-96.9245283018868,115.671254153463" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="206.5,209.952830188679">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="29.5,66.658934525783"
+              Start="0,0"
+              End="29.5,59.158934525783">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.3294672628915" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.3294672628915"
+                    Point2="0,33.3294672628915"
+                    Point3="4,33.3294672628915" />
+                  <mssgle:LineSegment
+                    End="25.5,33.3294672628915" />
+                  <mssgle:CubicBezierSegment
+                    Point1="25.5,33.3294672628915"
+                    Point2="29.5,33.3294672628915"
+                    Point3="29.5,37.3294672628915" />
+                  <mssgle:LineSegment
+                    End="29.5,59.158934525783" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Documentation for this process can be found at:&#xA;j:\Forecsat Unit\ AFRS_MEXP_7205\SSIS_2008\&#xA;ManageBulkAssignments\Documentation.doc"
+          ParentId="Package"
+          Size="250,109"
+          Id="21a97b71-857e-4efb-8cf9-66be38432898"
+          TopLeft="451.863881411349,86.1981132075472">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="11.399999618530273"
+              Color="#FF080000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="RunBulkAssignments&#xA;(j:Forecast Unit/AFRS_MEXP_7205/SSIS/ManageBulkAssignments/RunBulkAssignments"
+          ParentId="Package"
+          Size="487,54"
+          Id="c538f722-374a-4b39-a4a9-cd3f941707fc"
+          TopLeft="15.688679245283,5.5">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="11.399999618530273"
+              Color="#FF080000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="Insert Bulk Assignments"
+          ParentId="Package"
+          Size="226,40"
+          Id="e1a62600-94f0-40a0-81fa-661de2f5c3da"
+          TopLeft="24.7075471698113,77.9150943396226">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="11.399999618530273"
+              Color="#FF080000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

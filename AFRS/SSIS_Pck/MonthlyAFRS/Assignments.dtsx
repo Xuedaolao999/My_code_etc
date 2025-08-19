@@ -1,0 +1,2679 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/27/2008 12:50:06 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="DSHSMAA-Z073160"
+  DTS:CreatorName="DSHS\robine"
+  DTS:DTSID="{B049DF5B-C715-4CFD-91A3-6B12BE8C908A}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="14.0.3008.28"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Assignments"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="279"
+  DTS:VersionGUID="{BD2E6678-D439-478A-A894-13F56A6A0918}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MedicaidForecastServer]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{CB10974D-1399-47FB-AE21-706A81E34716}"
+      DTS:ObjectName="MedicaidForecastServer">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=FRCDBAppPr;Initial Catalog=Med_Forecast;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{246A5BEB-4377-49CE-95EF-2CCC4934295F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="cycle">
+      <DTS:VariableValue
+        DTS:DataType="8">2524</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Delete from MonthlyOFMFile those records with assignments"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Delete from MonthlyOFMFile&#xA;where CreateBy is null"
+      DTS:DTSID="{91308F23-CA24-4739-9A0D-6B90734C81F9}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete from MonthlyOFMFile those records with assignments"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{CB10974D-1399-47FB-AE21-706A81E34716}"
+          SQLTask:SqlStatementSource="Delete from zxg.MonthlyOFMFile&#xA;where CreateBy is null" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Lookup assignments for MonthlyOFMFile"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{83FC572C-46A6-425D-9C31-D4A9E2A94F49}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Lookup assignments for MonthlyOFMFile"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v9; (C) 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          engineThreads="5"
+          version="1">
+          <components>
+            <component
+              refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="AFRS Extract"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[zxg].[afrs_extract]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">CHECK_CONSTRAINTS,ROWS_PER_BATCH = 5000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">5000</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MedicaidForecastServer]"
+                  connectionManagerRefId="Package.ConnectionManagers[MedicaidForecastServer]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[Agency]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Agency"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[Agency]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Agency]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[PostFiscalMonth]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="PostFiscalMonth"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[PostFiscalMonth]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[PostFiscalMonth]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[Account]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Account"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[Account]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Account]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[ExpenditureAuth]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="ExpenditureAuth"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[ExpenditureAuth]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[ExpenditureAuth]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[Program]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Program"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[Program]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Program]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[Object]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Object"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[Object]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Object]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[BudgetUnit]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="BudgetUnit"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[BudgetUnit]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[BudgetUnit]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[MonthOfService]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="MonthOfService"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[MonthOfService]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[MonthOfService]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[Project]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Project"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[Project]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Project]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[MajorSource]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="MajorSource"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[MajorSource]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[MajorSource]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[Source]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="Source"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[Source]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Source]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[CostObjective]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="CostObjective"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[CostObjective]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[CostObjective]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[CostAllocationFundingType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="CostAllocationFundingType"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[CostAllocationFundingType]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[CostAllocationFundingType]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[PertainingIndicator]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="PertainingIndicator"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[PertainingIndicator]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[PertainingIndicator]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[GeneralLedger]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="GeneralLedger"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[GeneralLedger]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[GeneralLedger]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[TransactionAmount]"
+                      cachedDataType="cy"
+                      cachedName="TransactionAmount"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[TransactionAmount]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[TransactionAmount]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[ExpenditureAuth_Index]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="ExpenditureAuth_Index"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[ExpenditureAuth_Index]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[ExpenditureAuth_Index]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[ExpenditureAuth_Type]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="ExpenditureAuth_Type"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[ExpenditureAuth_Type]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[ExpenditureAuth_Type]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[Organization]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Organization"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[Organization]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Organization]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[ProjectPhase]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="ProjectPhase"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[ProjectPhase]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[ProjectPhase]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[SubProject]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="SubProject"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[SubProject]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[SubProject]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[SubSource]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="SubSource"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[SubSource]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[SubSource]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[CreateBy]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CreateBy"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[CreateBy]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[CreateBy]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[CreateDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CreateDate"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[CreateDate]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[CreateDate]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[AFRS_Assignments_Id]"
+                      cachedDataType="i4"
+                      cachedName="AFRS_Assignments_Id"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[AFRS_Assignments_Id]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Outputs[Lookup Match Output].Columns[AFRS_Assignments_Id]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[AFRS_MonthlyAssignmentxWalk_Id]"
+                      cachedDataType="i4"
+                      cachedName="AFRS_MonthlyAssignmentxWalk_Id"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[AFRS_xWalk_Id]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Outputs[Lookup Match Output].Columns[AFRS_MonthlyAssignmentxWalk_Id]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].Columns[Cycle]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Cycle"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[Cycle]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\Data Conversion.Outputs[Data Conversion Output].Columns[Cycle]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[AFRS_Extract_Id]"
+                      dataType="i4"
+                      name="AFRS_Extract_Id" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[Agency]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Agency" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[PostFiscalMonth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="PostFiscalMonth" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[Account]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Account" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[ExpenditureAuth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="ExpenditureAuth" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[ExpenditureAuth_Index]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="ExpenditureAuth_Index" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[ExpenditureAuth_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ExpenditureAuth_Type" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[Program]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Program" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[Object]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Object" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[Organization]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Organization" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[BudgetUnit]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="BudgetUnit" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[MonthOfService]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="MonthOfService" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[Project]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Project" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[SubProject]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="SubProject" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[ProjectPhase]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="ProjectPhase" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[MajorSource]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="MajorSource" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[Source]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="Source" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[SubSource]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="SubSource" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[CostObjective]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="CostObjective" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[CostAllocationFundingType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="CostAllocationFundingType" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[PertainingIndicator]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="PertainingIndicator" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[GeneralLedger]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="GeneralLedger" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[TransactionAmount]"
+                      dataType="r8"
+                      name="TransactionAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[Comment]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Comment" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[CreateBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CreateBy" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[CreateDate]"
+                      dataType="dbTimeStamp"
+                      name="CreateDate" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[ErrorFlag]"
+                      dataType="i2"
+                      name="ErrorFlag" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[AFRS_xWalk_Id]"
+                      dataType="numeric"
+                      name="AFRS_xWalk_Id"
+                      precision="20" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[AFRS_Assignments_Id]"
+                      dataType="numeric"
+                      name="AFRS_Assignments_Id"
+                      precision="20" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input].ExternalColumns[Cycle]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="Cycle" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Lookup assignments for MonthlyOFMFile\Data Conversion"
+              componentClassID="DTSTransform.DataConvert.3"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Lookup assignments for MonthlyOFMFile\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\Data Conversion.Inputs[Data Conversion Input].Columns[Cycle]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="Cycle"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\Get values for CreateBy and Create Date.Outputs[Derived Column Output].Columns[Cycle]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Lookup assignments for MonthlyOFMFile\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Lookup assignments for MonthlyOFMFile\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\Data Conversion.Outputs[Data Conversion Output].Columns[Cycle]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\Data Conversion.Outputs[Data Conversion Output].Columns[Cycle]"
+                      name="Cycle"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Lookup assignments for MonthlyOFMFile\Get values for CreateBy and Create Date.Outputs[Derived Column Output].Columns[Cycle]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Lookup assignments for MonthlyOFMFile\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Lookup assignments for MonthlyOFMFile\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Lookup assignments for MonthlyOFMFile\Get values for CreateBy and Create Date"
+              componentClassID="DTSTransform.DerivedColumn.3"
+              contactInfo="Derived Column;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Updates column values using expressions"
+              name="Get values for CreateBy and Create Date"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Lookup assignments for MonthlyOFMFile\Get values for CreateBy and Create Date.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\Get values for CreateBy and Create Date.Inputs[Derived Column Input].Columns[CreateBy]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CreateBy"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[CreateBy]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"MonthlyProcess"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"MonthlyProcess"</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\Get values for CreateBy and Create Date.Inputs[Derived Column Input].Columns[CreateDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CreateDate"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[CreateDate]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Lookup assignments for MonthlyOFMFile\Get values for CreateBy and Create Date.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Lookup assignments for MonthlyOFMFile\Get values for CreateBy and Create Date.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\Get values for CreateBy and Create Date.Outputs[Derived Column Output].Columns[Cycle]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\Get values for CreateBy and Create Date.Outputs[Derived Column Output].Columns[Cycle]"
+                      name="Cycle"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::cycle]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::cycle]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Lookup assignments for MonthlyOFMFile\Get values for CreateBy and Create Date.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Lookup assignments for MonthlyOFMFile\Get values for CreateBy and Create Date.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\Get values for CreateBy and Create Date.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\Get values for CreateBy and Create Date.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\Get values for CreateBy and Create Date.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\Get values for CreateBy and Create Date.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject"
+              componentClassID="DTSTransform.Lookup.3"
+              contactInfo="Lookup;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Looks up values in a reference dataset by using exact matching."
+              name="Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from [zxg].[afrs_assignments]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam">select * from (select * from [zxg].[afrs_assignments]) [refTable]
+where [refTable].[Biennium] = ? and [refTable].[ProgramIndex] = ? and [refTable].[Allocation] = ? and [refTable].[SubSubObject] = ? and [refTable].[SubObject] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="AFRS_Assignments_Id" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="AFRS_MonthlyAssignmentxWalk_Id" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Biennium" dataType="DT_STR" length="4" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="ProgramIndex" dataType="DT_STR" length="5" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="Allocation" dataType="DT_STR" length="4" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="SubObject" dataType="DT_STR" length="2" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="SubSubObject" dataType="DT_STR" length="4" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CreateBy" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CreateDate" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Biennium]};#{Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[ProgramIndex]};#{Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Allocation]};#{Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[SubSubObject]};#{Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[SubObject]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MedicaidForecastServer]"
+                  connectionManagerRefId="Package.ConnectionManagers[MedicaidForecastServer]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Inputs[Lookup Input].Columns[Biennium]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Biennium"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Biennium]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Biennium</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Inputs[Lookup Input].Columns[ProgramIndex]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="ProgramIndex"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[ProgramIndex]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">ProgramIndex</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Inputs[Lookup Input].Columns[Allocation]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Allocation"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Allocation]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Allocation</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Inputs[Lookup Input].Columns[SubSubObject]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="SubSubObject"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[SubSubObject]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">SubSubObject</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Inputs[Lookup Input].Columns[SubObject]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="SubObject"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[SubObject]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">SubObject</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="RedirectRow"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Outputs[Lookup Match Output].Columns[AFRS_Assignments_Id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Outputs[Lookup Match Output].Columns[AFRS_Assignments_Id]"
+                      name="AFRS_Assignments_Id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">AFRS_Assignments_Id</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Outputs[Lookup Match Output].Columns[AFRS_MonthlyAssignmentxWalk_Id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Outputs[Lookup Match Output].Columns[AFRS_MonthlyAssignmentxWalk_Id]"
+                      name="AFRS_MonthlyAssignmentxWalk_Id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">AFRS_MonthlyAssignmentxWalk_Id</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="MonthlyOFMFile"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[zxg].[MonthlyOFMFile]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MedicaidForecastServer]"
+                  connectionManagerRefId="Package.ConnectionManagers[MedicaidForecastServer]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Agency]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[Agency]"
+                      length="4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Agency]"
+                      name="Agency"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Biennium]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[Biennium]"
+                      length="4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Biennium]"
+                      name="Biennium"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[PostFiscalMonth]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[PostFiscalMonth]"
+                      length="2"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[PostFiscalMonth]"
+                      name="PostFiscalMonth"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Account]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[Account]"
+                      length="3"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Account]"
+                      name="Account"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[ExpenditureAuth]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[ExpenditureAuth]"
+                      length="3"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[ExpenditureAuth]"
+                      name="ExpenditureAuth"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Program]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[Program]"
+                      length="3"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Program]"
+                      name="Program"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[ProgramIndex]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[ProgramIndex]"
+                      length="5"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[ProgramIndex]"
+                      name="ProgramIndex"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Object]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[Object]"
+                      length="1"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Object]"
+                      name="Object"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Allocation]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[Allocation]"
+                      length="4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Allocation]"
+                      name="Allocation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[BudgetUnit]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[BudgetUnit]"
+                      length="3"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[BudgetUnit]"
+                      name="BudgetUnit"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[MonthOfService]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[MonthOfService]"
+                      length="6"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[MonthOfService]"
+                      name="MonthOfService"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Project]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[Project]"
+                      length="4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Project]"
+                      name="Project"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[MajorSource]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[MajorSource]"
+                      length="2"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[MajorSource]"
+                      name="MajorSource"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Source]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[Source]"
+                      length="2"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Source]"
+                      name="Source"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[CostObjective]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[CostObjective]"
+                      length="5"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[CostObjective]"
+                      name="CostObjective"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[CostAllocationFundingType]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[CostAllocationFundingType]"
+                      length="1"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[CostAllocationFundingType]"
+                      name="CostAllocationFundingType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[PertainingIndicator]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[PertainingIndicator]"
+                      length="2"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[PertainingIndicator]"
+                      name="PertainingIndicator"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[GeneralLedger]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[GeneralLedger]"
+                      length="4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[GeneralLedger]"
+                      name="GeneralLedger"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[TransactionAmount]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[TransactionAmount]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[TransactionAmount]"
+                      name="TransactionAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[ExpenditureAuth_Index]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[ExpenditureAuth_Index]"
+                      length="3"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[ExpenditureAuth_Index]"
+                      name="ExpenditureAuth_Index"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[ExpenditureAuth_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[ExpenditureAuth_Type]"
+                      length="1"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[ExpenditureAuth_Type]"
+                      name="ExpenditureAuth_Type"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[SubSubObject]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[SubSubObject]"
+                      length="4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[SubSubObject]"
+                      name="SubSubObject"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Organization]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[Organization]"
+                      length="4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Organization]"
+                      name="Organization"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[ProjectPhase]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[ProjectPhase]"
+                      length="2"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[ProjectPhase]"
+                      name="ProjectPhase"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[SubObject]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[SubObject]"
+                      length="2"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[SubObject]"
+                      name="SubObject"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[SubProject]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[SubProject]"
+                      length="2"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[SubProject]"
+                      name="SubProject"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[SubSource]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[SubSource]"
+                      length="6"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[SubSource]"
+                      name="SubSource"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[CreateBy]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[CreateBy]"
+                      length="50"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[CreateBy]"
+                      name="CreateBy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[CreateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[CreateDate]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[CreateDate]"
+                      name="CreateDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[MonthlyOFMFile_Id]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[MonthlyOFMFile_Id]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[MonthlyOFMFile_Id]"
+                      name="MonthlyOFMFile_Id"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[Agency]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Agency" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[Biennium]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Biennium" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[PostFiscalMonth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="PostFiscalMonth" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[Account]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Account" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[ExpenditureAuth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="ExpenditureAuth" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[Program]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Program" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[ProgramIndex]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="ProgramIndex" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[Object]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Object" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[Allocation]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Allocation" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[BudgetUnit]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="BudgetUnit" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[MonthOfService]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="MonthOfService" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[Project]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Project" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[MajorSource]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="MajorSource" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[Source]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="Source" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[CostObjective]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="CostObjective" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[CostAllocationFundingType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="CostAllocationFundingType" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[PertainingIndicator]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="PertainingIndicator" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[GeneralLedger]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="GeneralLedger" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[TransactionAmount]"
+                      dataType="cy"
+                      name="TransactionAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[ExpenditureAuth_Index]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="ExpenditureAuth_Index" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[ExpenditureAuth_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ExpenditureAuth_Type" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[SubSubObject]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="SubSubObject" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[Organization]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Organization" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[ProjectPhase]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="ProjectPhase" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[SubObject]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="SubObject" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[SubProject]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="SubProject" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[SubSource]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="SubSource" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[CreateBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CreateBy" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[CreateDate]"
+                      dataType="dbTimeStamp"
+                      name="CreateDate" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].ExternalColumns[MonthlyOFMFile_Id]"
+                      dataType="i8"
+                      name="MonthlyOFMFile_Id" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[MonthlyOFMFile_Id]"
+                      dataType="i8"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[MonthlyOFMFile_Id]"
+                      name="MonthlyOFMFile_Id" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[Agency]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[Agency]"
+                      name="Agency" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[Biennium]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[Biennium]"
+                      name="Biennium" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[PostFiscalMonth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[PostFiscalMonth]"
+                      name="PostFiscalMonth" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[Account]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[Account]"
+                      name="Account" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[ExpenditureAuth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[ExpenditureAuth]"
+                      name="ExpenditureAuth" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[Program]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[Program]"
+                      name="Program" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[ProgramIndex]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[ProgramIndex]"
+                      name="ProgramIndex" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[Object]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[Object]"
+                      name="Object" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[SubObject]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[SubObject]"
+                      name="SubObject" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[Allocation]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[Allocation]"
+                      name="Allocation" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[BudgetUnit]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[BudgetUnit]"
+                      name="BudgetUnit" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[MonthOfService]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[MonthOfService]"
+                      name="MonthOfService" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[Project]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[Project]"
+                      name="Project" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[SubProject]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[SubProject]"
+                      name="SubProject" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[MajorSource]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[MajorSource]"
+                      name="MajorSource" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[Source]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[Source]"
+                      name="Source" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[CostObjective]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[CostObjective]"
+                      name="CostObjective" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[SubSource]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[SubSource]"
+                      name="SubSource" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[CostAllocationFundingType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[CostAllocationFundingType]"
+                      name="CostAllocationFundingType" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[PertainingIndicator]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[PertainingIndicator]"
+                      name="PertainingIndicator" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[GeneralLedger]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[GeneralLedger]"
+                      name="GeneralLedger" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[TransactionAmount]"
+                      dataType="cy"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[TransactionAmount]"
+                      name="TransactionAmount" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[ExpenditureAuth_Index]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[ExpenditureAuth_Index]"
+                      name="ExpenditureAuth_Index" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[ExpenditureAuth_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[ExpenditureAuth_Type]"
+                      name="ExpenditureAuth_Type" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[SubSubObject]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[SubSubObject]"
+                      name="SubSubObject" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[Organization]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[Organization]"
+                      name="Organization" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[ProjectPhase]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[ProjectPhase]"
+                      name="ProjectPhase" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[CreateBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[CreateBy]"
+                      name="CreateBy" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[CreateDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[CreateDate]"
+                      name="CreateDate" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="MonthlyOFMFile 2"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[zxg].[MonthlyOFMFile]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">CHECK_CONSTRAINTS,ROWS_PER_BATCH = 1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">1000</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MedicaidForecastServer]"
+                  connectionManagerRefId="Package.ConnectionManagers[MedicaidForecastServer]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[Agency]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Agency"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[Agency]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Agency]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[Biennium]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Biennium"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[Biennium]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Biennium]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[PostFiscalMonth]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="PostFiscalMonth"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[PostFiscalMonth]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[PostFiscalMonth]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[Account]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Account"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[Account]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Account]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[ExpenditureAuth]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="ExpenditureAuth"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[ExpenditureAuth]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[ExpenditureAuth]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[Program]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Program"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[Program]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Program]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[ProgramIndex]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="ProgramIndex"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[ProgramIndex]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[ProgramIndex]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[Object]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Object"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[Object]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Object]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[Allocation]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Allocation"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[Allocation]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Allocation]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[BudgetUnit]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="BudgetUnit"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[BudgetUnit]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[BudgetUnit]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[MonthOfService]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="MonthOfService"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[MonthOfService]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[MonthOfService]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[Project]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Project"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[Project]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Project]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[MajorSource]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="MajorSource"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[MajorSource]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[MajorSource]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[Source]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="Source"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[Source]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Source]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[CostObjective]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="CostObjective"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[CostObjective]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[CostObjective]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[CostAllocationFundingType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="CostAllocationFundingType"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[CostAllocationFundingType]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[CostAllocationFundingType]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[PertainingIndicator]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="PertainingIndicator"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[PertainingIndicator]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[PertainingIndicator]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[GeneralLedger]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="GeneralLedger"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[GeneralLedger]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[GeneralLedger]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[TransactionAmount]"
+                      cachedDataType="cy"
+                      cachedName="TransactionAmount"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[TransactionAmount]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[TransactionAmount]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[ExpenditureAuth_Index]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="ExpenditureAuth_Index"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[ExpenditureAuth_Index]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[ExpenditureAuth_Index]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[ExpenditureAuth_Type]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="ExpenditureAuth_Type"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[ExpenditureAuth_Type]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[ExpenditureAuth_Type]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[SubSubObject]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="SubSubObject"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[SubSubObject]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[SubSubObject]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[Organization]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Organization"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[Organization]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[Organization]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[ProjectPhase]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="ProjectPhase"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[ProjectPhase]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[ProjectPhase]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[SubObject]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="SubObject"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[SubObject]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[SubObject]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[SubProject]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="SubProject"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[SubProject]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[SubProject]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[SubSource]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="SubSource"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[SubSource]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[SubSource]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[CreateBy]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CreateBy"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[CreateBy]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[CreateBy]" />
+                    <inputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].Columns[CreateDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CreateDate"
+                      externalMetadataColumnId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[CreateDate]"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output].Columns[CreateDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[MonthlyOFMFile_Id]"
+                      dataType="i8"
+                      name="MonthlyOFMFile_Id" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[Agency]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Agency" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[PostFiscalMonth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="PostFiscalMonth" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[Account]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Account" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[ExpenditureAuth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="ExpenditureAuth" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[ExpenditureAuth_Index]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="ExpenditureAuth_Index" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[ExpenditureAuth_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="ExpenditureAuth_Type" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[Program]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Program" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[Object]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Object" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[SubObject]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="SubObject" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[Organization]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Organization" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[BudgetUnit]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="BudgetUnit" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[MonthOfService]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="MonthOfService" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[Project]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Project" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[SubProject]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="SubProject" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[ProjectPhase]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="ProjectPhase" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[MajorSource]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="MajorSource" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[Source]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="Source" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[SubSource]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="SubSource" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[CostObjective]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="CostObjective" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[CostAllocationFundingType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="CostAllocationFundingType" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[PertainingIndicator]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="PertainingIndicator" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[GeneralLedger]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="GeneralLedger" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[TransactionAmount]"
+                      dataType="cy"
+                      name="TransactionAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[Biennium]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Biennium" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[ProgramIndex]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="ProgramIndex" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[Allocation]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Allocation" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[SubSubObject]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="SubSubObject" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[CreateBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="CreateBy" />
+                    <externalMetadataColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input].ExternalColumns[CreateDate]"
+                      dataType="dbTimeStamp"
+                      name="CreateDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Lookup assignments for MonthlyOFMFile.Paths[Data Conversion Output]"
+              endId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Inputs[Lookup Input]"
+              name="Data Conversion Output"
+              startId="Package\Lookup assignments for MonthlyOFMFile\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Lookup assignments for MonthlyOFMFile.Paths[Derived Column Output]"
+              endId="Package\Lookup assignments for MonthlyOFMFile\Data Conversion.Inputs[Data Conversion Input]"
+              name="Derived Column Output"
+              startId="Package\Lookup assignments for MonthlyOFMFile\Get values for CreateBy and Create Date.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Lookup assignments for MonthlyOFMFile.Paths[Lookup Error Output]"
+              endId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2.Inputs[OLE DB Destination Input]"
+              name="Lookup Error Output"
+              startId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Outputs[Lookup Error Output]" />
+            <path
+              refId="Package\Lookup assignments for MonthlyOFMFile.Paths[Lookup Output]"
+              endId="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract.Inputs[OLE DB Destination Input]"
+              name="Lookup Output"
+              startId="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Lookup assignments for MonthlyOFMFile.Paths[OLE DB Source Output]"
+              endId="Package\Lookup assignments for MonthlyOFMFile\Get values for CreateBy and Create Date.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{85927C7A-C722-4C23-9BF0-B00CAC75E571}"
+      DTS:From="Package\Lookup assignments for MonthlyOFMFile"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Delete from MonthlyOFMFile those records with assignments" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <NodeLayout
+          Size="366,42"
+          Id="Package\Delete from MonthlyOFMFile those records with assignments"
+          TopLeft="80.09501348682,293.711875667935" />
+        <NodeLayout
+          Size="269,42"
+          Id="Package\Lookup assignments for MonthlyOFMFile"
+          TopLeft="134.41644199986,63.828745846538" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="266.00572774334,105.828745846538">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,187.883129821397"
+              Start="0,0"
+              End="0,180.383129821397">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,180.383129821397" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="This is the step (Assignments) that you run&#xA;twice, first when you initially run the monthly&#xA;process, and the second time after inserting&#xA;your new bulk assignments."
+          ParentId="Package"
+          Size="259,79"
+          Id="86410fa4-56bc-4272-b030-66b1f8a73a3b"
+          TopLeft="603.408355765954,69.402386228934">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="11.399999618530273"
+              Color="#FF080000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="!!! &#xA;priro to running the final load,&#xA;remove prior loading!!!&#xA;&#xA;delete &#xA;from zxg.afrs_extract&#xA;where cast(CreateDate as date) = cast(getdate() as date)"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="325,136"
+          Id="a1e9259d-a866-4b57-a0b6-8430746130d2"
+          TopLeft="656,181.75" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Lookup assignments for MonthlyOFMFile">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <NodeLayout
+          Size="441,42"
+          Id="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject"
+          TopLeft="16.6698113207547,245.405660377358" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Lookup assignments for MonthlyOFMFile\Data Conversion"
+          TopLeft="291,127" />
+        <NodeLayout
+          Size="170,44"
+          Id="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2"
+          TopLeft="740.216981132075,247.72641509434" />
+        <NodeLayout
+          Size="137,44"
+          Id="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile"
+          TopLeft="44.4811320754717,8.5" />
+        <NodeLayout
+          Size="142,42"
+          Id="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract"
+          TopLeft="46.8800538791617,454.174139818878" />
+        <NodeLayout
+          Size="192,44"
+          Id="Package\Lookup assignments for MonthlyOFMFile\Get values for CreateBy and Create Date"
+          TopLeft="15.5,98.8018867924528" />
+        <EdgeLayout
+          Id="Package\Lookup assignments for MonthlyOFMFile.Paths[Derived Column Output]"
+          TopLeft="207.5,120.801886792453">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="83.5,27.1981132075472"
+              Start="0,0"
+              End="76,27.1981132075472">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="37.75,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="37.75,0"
+                    Point2="41.75,0"
+                    Point3="41.75,4" />
+                  <mssgle:LineSegment
+                    End="41.75,23.1981132075472" />
+                  <mssgle:CubicBezierSegment
+                    Point1="41.75,23.1981132075472"
+                    Point2="41.75,27.1981132075472"
+                    Point3="45.75,27.1981132075472" />
+                  <mssgle:LineSegment
+                    End="76,27.1981132075472" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Lookup assignments for MonthlyOFMFile.Paths[Data Conversion Output]"
+          TopLeft="369,169">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-131.830188679245,76.405660377358"
+              Start="0,0"
+              End="-131.830188679245,68.905660377358">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.202830188679" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,34.202830188679"
+                    Point2="0,38.202830188679"
+                    Point3="-4,38.202830188679" />
+                  <mssgle:LineSegment
+                    End="-127.830188679245,38.202830188679" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-127.830188679245,38.202830188679"
+                    Point2="-131.830188679245,38.202830188679"
+                    Point3="-131.830188679245,42.202830188679" />
+                  <mssgle:LineSegment
+                    End="-131.830188679245,68.905660377358" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Lookup assignments for MonthlyOFMFile.Paths[OLE DB Source Output]"
+          TopLeft="112.240566037736,52.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,46.3018867924528"
+              Start="0,0"
+              End="0,38.8018867924528">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.8018867924528" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Lookup assignments for MonthlyOFMFile.Paths[Lookup Output]"
+          TopLeft="237.169811320755,287.405660377358">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-119.289757441593,166.76847944152"
+              Start="0,0"
+              End="-119.289757441593,159.26847944152">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,79.38423972076" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,79.38423972076"
+                    Point2="0,83.38423972076"
+                    Point3="-4,83.38423972076" />
+                  <mssgle:LineSegment
+                    End="-115.289757441593,83.38423972076" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-115.289757441593,83.38423972076"
+                    Point2="-119.289757441593,83.38423972076"
+                    Point3="-119.289757441593,87.38423972076" />
+                  <mssgle:LineSegment
+                    End="-119.289757441593,159.26847944152" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-107.836265439547,88.38423972076,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Lookup assignments for MonthlyOFMFile.Paths[Lookup Error Output]"
+          TopLeft="457.669811320755,268.066037735849">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="282.54716981132,0"
+              Start="0,0"
+              End="275.04716981132,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="275.04716981132,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="91.65719818691,5,91.7327734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Lookup assignments for MonthlyOFMFile"
+          ParentId="Package\Lookup assignments for MonthlyOFMFile"
+          Size="226,NaN"
+          Id="a9435b39-27f7-442e-b7e0-e76523a8adee"
+          TopLeft="234.367924528302,19.688679245283">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="11.399999618530273"
+              Color="#FF080000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Lookup assignments for MonthlyOFMFile\Lookup on Biennium, programIndex, allocation, SubObject and Subsubobject">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[zxg].[afrs_assignments]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile 2">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Lookup assignments for MonthlyOFMFile\MonthlyOFMFile">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Lookup assignments for MonthlyOFMFile\AFRS Extract">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

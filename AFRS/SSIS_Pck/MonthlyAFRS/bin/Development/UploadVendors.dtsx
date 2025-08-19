@@ -1,0 +1,2271 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/18/2013 9:35:09 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="HCAWKZ110974"
+  DTS:CreatorName="HCALAN\robine"
+  DTS:DTSID="{39693FB1-1C47-42A4-BC7D-DF26102C8E56}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5569.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="UploadVendors"
+  DTS:PackageType="5"
+  DTS:VersionBuild="45"
+  DTS:VersionGUID="{301C7C15-08CD-4C03-AF09-1BA1317602D5}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AFRSVendorsData]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{D2C8C6EE-30A0-46A3-BAAC-4EED37BEB12B}"
+      DTS:ObjectName="AFRSVendorsData">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=J:\Forecast Unit\AFRS_MEXP_7205\Forecast Database and xWalk Documentation\Fastrack Reports\FM1701VendorCash.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Forecast]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{CA4D01A4-F6D6-4520-9096-5622A15C81DD}"
+      DTS:ObjectName="Forecast">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=HCADBOLY206;Initial Catalog=Forecast;Provider=SQLNCLI10.1;Integrated Security=SSPI;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{71C77AC2-58C8-4821-8360-EF79B9DAB820}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\AFRS Vendors"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="AFRS Vendors"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[AFRS_Vendors]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\AFRS Vendors.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Forecast]"
+                  connectionManagerRefId="Package.ConnectionManagers[Forecast]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Amount  ]"
+                      cachedDataType="r8"
+                      cachedName="Amount  "
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[Amount  ]"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Amount  ]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of CreateBy]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="Copy of CreateBy"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[CreateBy]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CreateBy]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of GL]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Copy of GL"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[GL]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of GL]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[CreateDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CreateDate"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[CreateDate]"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[CreateDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of Organization]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Copy of Organization"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[Organization]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Organization]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of FM]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Copy of FM"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[FM]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of FM]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of Proc Dte]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Copy of Proc Dte"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[ProcDte]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Proc Dte]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of Cur Doc No]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="Copy of Cur Doc No"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[CurDocNo]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Cur Doc No]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of TT]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Copy of TT"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[TT]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of TT]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of BT]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="Copy of BT"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[BT]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of BT]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of TC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Copy of TC"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[TC]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of TC]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of Acct]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Copy of Acct"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[Acct]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Acct]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of EAI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Copy of EAI"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[EAI ]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EAI]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of PI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="Copy of PI"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[PI]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PI]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of SO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="Copy of SO"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[SO]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of SSO]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Copy of SSO"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[SSO]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SSO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of Alloc]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Copy of Alloc"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[Alloc]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Alloc]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of MOS]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="Copy of MOS"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[MOS]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of MOS]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of BU]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Copy of BU"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[BU]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of BU]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of Proj]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Copy of Proj"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[Proj]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Proj]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of SP]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="Copy of SP"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[SP]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SP]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of Ph]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="Copy of Ph"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[Ph]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Ph]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of PT]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Copy of PT"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[PT]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PT]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of Cobj]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="Copy of Cobj"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[Cobj]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Cobj]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of CAFT]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Copy of CAFT"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[CAFT]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CAFT]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of Vendor Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="200"
+                      cachedName="Copy of Vendor Name"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[VendorName]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Vendor Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of Division]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Copy of Division"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[Division]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Division]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of OI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Copy of OI"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[OI]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OI]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].Columns[Copy of Ref Doc No]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="Copy of Ref Doc No"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[RefDocNo]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Ref Doc No]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[GL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="GL" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[FM]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="FM" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[ProcDte]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="ProcDte" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[CurDocNo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="CurDocNo" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[RefDocNo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="RefDocNo" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[TT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="TT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[BT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="BT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[TC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="TC" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[Acct]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Acct" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[EAI ]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="EAI " />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[PI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="PI" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[SO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="SO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[SSO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="SSO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[Alloc]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Alloc" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[BU]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="BU" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[MOS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="MOS" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[Proj]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Proj" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[SP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="SP" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[Ph]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="Ph" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[PT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="PT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[Cobj]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="Cobj" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[CAFT]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="CAFT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[VendorName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="VendorName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[Amount  ]"
+                      dataType="r8"
+                      name="Amount  " />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[CreateBy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="CreateBy" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[CreateDate]"
+                      dataType="dbTimeStamp"
+                      name="CreateDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[AFRS_Vendors_Id]"
+                      dataType="i4"
+                      name="AFRS_Vendors_Id" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[Organization]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Organization" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[Division]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Division" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input].ExternalColumns[OI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="OI" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\AFRS Vendors.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\AFRS Vendors.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\AFRS Vendors.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\AFRS Vendors Data"
+              componentClassID="{8C084929-27D1-479F-9641-ABB7CDADF1AC}"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="AFRS Vendors Data"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">Sheet1$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\AFRS Vendors Data.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AFRSVendorsData]"
+                  connectionManagerRefId="Package.ConnectionManagers[AFRSVendorsData]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[FM]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[FM]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[FM]"
+                      name="FM"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Proc Dte]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[Proc Dte]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Proc Dte]"
+                      name="Proc Dte"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Cur Doc No]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[Cur Doc No]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Cur Doc No]"
+                      name="Cur Doc No"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Ref Doc No]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[Ref Doc No]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Ref Doc No]"
+                      name="Ref Doc No"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[TT]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[TT]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[TT]"
+                      name="TT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[BT]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[BT]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[BT]"
+                      name="BT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[TC]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[TC]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[TC]"
+                      name="TC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Acct]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[Acct]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Acct]"
+                      name="Acct"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[EAI ]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[EAI ]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[EAI ]"
+                      name="EAI "
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[PI]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[PI]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[PI]"
+                      name="PI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[SO]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[SO]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[SO]"
+                      name="SO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[SSO]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[SSO]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[SSO]"
+                      name="SSO"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[OI]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[OI]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[OI]"
+                      name="OI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Alloc]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[Alloc]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Alloc]"
+                      name="Alloc"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[BU]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[BU]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[BU]"
+                      name="BU"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[MOS]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[MOS]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[MOS]"
+                      name="MOS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Proj]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[Proj]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Proj]"
+                      name="Proj"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[SP]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[SP]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[SP]"
+                      name="SP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Ph]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[Ph]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Ph]"
+                      name="Ph"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[PT]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[PT]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[PT]"
+                      name="PT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Cobj]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[Cobj]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Cobj]"
+                      name="Cobj"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[CAFT]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[CAFT]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[CAFT]"
+                      name="CAFT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Vendor Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[Vendor Name]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Vendor Name]"
+                      name="Vendor Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Amount  ]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[Amount  ]"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Amount  ]"
+                      name="Amount  "
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[FM]"
+                      dataType="wstr"
+                      length="255"
+                      name="FM" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[Proc Dte]"
+                      dataType="wstr"
+                      length="255"
+                      name="Proc Dte" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[Cur Doc No]"
+                      dataType="wstr"
+                      length="255"
+                      name="Cur Doc No" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[Ref Doc No]"
+                      dataType="wstr"
+                      length="255"
+                      name="Ref Doc No" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[TT]"
+                      dataType="wstr"
+                      length="255"
+                      name="TT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[BT]"
+                      dataType="wstr"
+                      length="255"
+                      name="BT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[TC]"
+                      dataType="wstr"
+                      length="255"
+                      name="TC" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[Acct]"
+                      dataType="wstr"
+                      length="255"
+                      name="Acct" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[EAI ]"
+                      dataType="wstr"
+                      length="255"
+                      name="EAI " />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[PI]"
+                      dataType="wstr"
+                      length="255"
+                      name="PI" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[SO]"
+                      dataType="wstr"
+                      length="255"
+                      name="SO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[SSO]"
+                      dataType="wstr"
+                      length="255"
+                      name="SSO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[OI]"
+                      dataType="wstr"
+                      length="255"
+                      name="OI" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[Alloc]"
+                      dataType="wstr"
+                      length="255"
+                      name="Alloc" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[BU]"
+                      dataType="wstr"
+                      length="255"
+                      name="BU" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[MOS]"
+                      dataType="wstr"
+                      length="255"
+                      name="MOS" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[Proj]"
+                      dataType="wstr"
+                      length="255"
+                      name="Proj" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[SP]"
+                      dataType="wstr"
+                      length="255"
+                      name="SP" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[Ph]"
+                      dataType="wstr"
+                      length="255"
+                      name="Ph" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[PT]"
+                      dataType="wstr"
+                      length="255"
+                      name="PT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[Cobj]"
+                      dataType="wstr"
+                      length="255"
+                      name="Cobj" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[CAFT]"
+                      dataType="wstr"
+                      length="255"
+                      name="CAFT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[Vendor Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Vendor Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].ExternalColumns[Amount  ]"
+                      dataType="r8"
+                      name="Amount  " />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[FM]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[FM]"
+                      name="FM" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[Proc Dte]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[Proc Dte]"
+                      name="Proc Dte" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[Cur Doc No]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[Cur Doc No]"
+                      name="Cur Doc No" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[Ref Doc No]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[Ref Doc No]"
+                      name="Ref Doc No" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[TT]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[TT]"
+                      name="TT" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[BT]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[BT]"
+                      name="BT" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[TC]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[TC]"
+                      name="TC" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[Acct]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[Acct]"
+                      name="Acct" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[EAI ]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[EAI ]"
+                      name="EAI " />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[PI]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[PI]"
+                      name="PI" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[SO]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[SO]"
+                      name="SO" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[SSO]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[SSO]"
+                      name="SSO" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[OI]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[OI]"
+                      name="OI" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[Alloc]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[Alloc]"
+                      name="Alloc" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[BU]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[BU]"
+                      name="BU" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[MOS]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[MOS]"
+                      name="MOS" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[Proj]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[Proj]"
+                      name="Proj" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[SP]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[SP]"
+                      name="SP" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[Ph]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[Ph]"
+                      name="Ph" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[PT]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[PT]"
+                      name="PT" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[Cobj]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[Cobj]"
+                      name="Cobj" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[CAFT]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[CAFT]"
+                      name="CAFT" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[Vendor Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[Vendor Name]"
+                      name="Vendor Name" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[Amount  ]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[Amount  ]"
+                      name="Amount  " />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Data Conversion"
+              componentClassID="{62B1106C-7DB8-4EC8-ADD6-4C664DFFC54A}"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[CreateBy]"
+                      cachedDataType="wstr"
+                      cachedLength="11"
+                      cachedName="CreateBy"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[CreateBy]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[GL]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="GL"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[GL]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Organization]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Organization"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Organization]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[FM]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="FM"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[FM]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Proc Dte]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Proc Dte"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Proc Dte]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Cur Doc No]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Cur Doc No"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Cur Doc No]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Ref Doc No]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Ref Doc No"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Ref Doc No]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[TT]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="TT"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[TT]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[BT]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="BT"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[BT]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[TC]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="TC"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[TC]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Acct]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Acct"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Acct]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[EAI ]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="EAI "
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[EAI ]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[PI]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PI"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[PI]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[SO]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="SO"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[SO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[SSO]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="SSO"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[SSO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Alloc]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Alloc"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Alloc]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[BU]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="BU"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[BU]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[MOS]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="MOS"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[MOS]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Proj]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Proj"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Proj]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[SP]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="SP"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[SP]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Ph]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Ph"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Ph]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[PT]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PT"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[PT]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Cobj]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Cobj"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Cobj]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[CAFT]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CAFT"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[CAFT]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Vendor Name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Vendor Name"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Vendor Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Division]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Division"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Division]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[OI]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="OI"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[OI]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CreateBy]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="11"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CreateBy]"
+                      name="Copy of CreateBy"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[CreateBy]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of GL]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of GL]"
+                      name="Copy of GL"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[GL]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Organization]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Organization]"
+                      name="Copy of Organization"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Organization]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of FM]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of FM]"
+                      name="Copy of FM"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[FM]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Proc Dte]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Proc Dte]"
+                      name="Copy of Proc Dte"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Proc Dte]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Cur Doc No]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="11"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Cur Doc No]"
+                      name="Copy of Cur Doc No"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Cur Doc No]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Ref Doc No]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="11"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Ref Doc No]"
+                      name="Copy of Ref Doc No"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Ref Doc No]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of TT]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of TT]"
+                      name="Copy of TT"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[TT]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of BT]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of BT]"
+                      name="Copy of BT"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[BT]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of TC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of TC]"
+                      name="Copy of TC"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[TC]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Acct]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="3"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Acct]"
+                      name="Copy of Acct"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Acct]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EAI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="3"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EAI]"
+                      name="Copy of EAI"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[EAI ]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="5"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PI]"
+                      name="Copy of PI"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[PI]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SO]"
+                      name="Copy of SO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[SO]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SSO]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SSO]"
+                      name="Copy of SSO"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[SSO]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Alloc]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Alloc]"
+                      name="Copy of Alloc"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Alloc]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of BU]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="3"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of BU]"
+                      name="Copy of BU"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[BU]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of MOS]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="6"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of MOS]"
+                      name="Copy of MOS"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[MOS]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Proj]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Proj]"
+                      name="Copy of Proj"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Proj]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SP]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SP]"
+                      name="Copy of SP"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[SP]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Ph]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Ph]"
+                      name="Copy of Ph"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Ph]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PT]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PT]"
+                      name="Copy of PT"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[PT]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Cobj]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="5"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Cobj]"
+                      name="Copy of Cobj"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Cobj]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CAFT]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CAFT]"
+                      name="Copy of CAFT"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[CAFT]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Vendor Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="200"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Vendor Name]"
+                      name="Copy of Vendor Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[Vendor Name]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Division]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Division]"
+                      name="Copy of Division"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Division]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OI]"
+                      name="Copy of OI"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[OI]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Derived Column"
+              componentClassID="{49928E82-9C4E-49F0-AABE-3812B82707EC}"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Updates column values using expressions"
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input].Columns[OI]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="OI"
+                      lineageId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[OI]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[GL]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[GL]"
+                      name="GL"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"6510"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"6510"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[CreateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[CreateDate]"
+                      name="CreateDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[CreateBy]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="11"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[CreateBy]"
+                      name="CreateBy"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"SSIS Upload"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"SSIS Upload"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Organization]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Organization]"
+                      name="Organization"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[OI]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">OI</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Division]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Division]"
+                      name="Division"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output].Columns[OI]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">OI</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Data Conversion Output]"
+              endId="Package\Data Flow Task\AFRS Vendors.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Derived Column Output]"
+              endId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
+              name="Derived Column Output"
+              startId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Excel Source Output]"
+              endId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+              name="Excel Source Output"
+              startId="Package\Data Flow Task\AFRS Vendors Data.Outputs[Excel Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Data Flow Task"
+          TopLeft="5.5,5.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <ConnectionManager
+    design-time-name="Package.ConnectionManagers[Forecast]">
+    <DataSourceID>Forecast</DataSourceID>
+  </ConnectionManager>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Data Flow Task\Derived Column"
+          TopLeft="29.4622641509434,134.292452830189" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Data Flow Task\AFRS Vendors"
+          TopLeft="5.5,389.915094339623" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Data Flow Task\AFRS Vendors Data"
+          TopLeft="15.5,5.5" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Data Flow Task\Data Conversion"
+          TopLeft="39.4622641509434,237.122641509434" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="97.3490566037736,178.216981132075">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="10,58.9056603773585"
+              Start="0,0"
+              End="10,51.4056603773585">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.4339622641509" />
+                  <mssgle:LineSegment
+                    End="10,29.4339622641509" />
+                  <mssgle:LineSegment
+                    End="10,51.4056603773585" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Data Conversion Output]"
+          TopLeft="107.349056603774,281.047169811321">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-33.9622641509434,108.867924528302"
+              Start="0,0"
+              End="-33.9622641509434,101.367924528302">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.4150943396226" />
+                  <mssgle:LineSegment
+                    End="-33.9622641509434,54.4150943396226" />
+                  <mssgle:LineSegment
+                    End="-33.9622641509434,101.367924528302" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Excel Source Output]"
+          TopLeft="83.3867924528302,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="13.9622641509434,84.8679245283019"
+              Start="0,0"
+              End="13.9622641509434,77.3679245283019">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.4150943396226" />
+                  <mssgle:LineSegment
+                    End="13.9622641509434,42.4150943396226" />
+                  <mssgle:LineSegment
+                    End="13.9622641509434,77.3679245283019" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

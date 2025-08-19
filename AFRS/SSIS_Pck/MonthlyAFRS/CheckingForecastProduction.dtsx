@@ -1,0 +1,1503 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/1/2018 1:31:04 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="OFMD10F306446"
+  DTS:CreatorName="ECLIENT\xingguoZ"
+  DTS:DTSID="{908BD682-CF57-421C-BF45-7E1E85451F73}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.6020.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="CheckingForecastProduction"
+  DTS:PackageType="5"
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{B4C09F44-8B75-456B-84A9-D793FFDD1A52}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CurrentStep]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{16DA92CC-5A61-41DB-AB93-8BC18E365BF9}"
+      DTS:ObjectName="CurrentStep">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Q:\ForecastExt\Feb 18 Forecast\Versions\06\StepsReport_FS_1905_D06.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[EarlierStep]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{0AC0A6FC-6FDD-4A65-A351-6331D04C8EF2}"
+      DTS:ObjectName="EarlierStep">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Q:\ForecastExt\Oct 17 Forecast\Steps\Versions\D06\StepsReport_FS_1724_D06.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MedicaidForecastServer]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{18174D63-709E-4294-80D1-EC1DA6DEC955}"
+      DTS:ObjectName="MedicaidForecastServer">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=ENADBOLY2561,9123;Initial Catalog=Med_Forecast;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{73F6B453-AF51-4C93-9836-3E892EE5B194}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="cur">
+      <DTS:VariableValue
+        DTS:DataType="8">1914</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6286E4A8-3984-4873-8F7E-158CBF69A1C5}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Cycle">
+      <DTS:VariableValue
+        DTS:DataType="8">1905</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A01F616A-1BA2-4EA8-BEC6-784E79E52482}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="pre">
+      <DTS:VariableValue
+        DTS:DataType="8">1912</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A6B16379-964C-4CE6-BFE7-5D9BF5F7A7EB}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ReleaseVersionNoStep">
+      <DTS:VariableValue
+        DTS:DataType="8">A06</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{32E6593D-E03D-439E-A963-7B6A62A8CD94}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ReleaseVersionWithStep">
+      <DTS:VariableValue
+        DTS:DataType="8">D06</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{0072A217-E01F-4778-8989-AF7E83BA47AE}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\CurStep"
+              componentClassID="{8C084929-27D1-479F-9641-ABB7CDADF1AC}"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="CurStep"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">Step_fs$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\CurStep.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CurrentStep]"
+                  connectionManagerRefId="Package.ConnectionManagers[CurrentStep]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[Name]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[Name]"
+                      name="Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[StepID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[StepID]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[StepID]"
+                      name="StepID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[ForMeg]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[ForMeg]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[ForMeg]"
+                      name="ForMeg"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[ForSvc]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[ForSvc]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[ForSvc]"
+                      name="ForSvc"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[ServiceMonth]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[ServiceMonth]"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[ServiceMonth]"
+                      name="ServiceMonth"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[FundType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[FundType]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[FundType]"
+                      name="FundType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[ForecastPerCap]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[ForecastPerCap]"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[ForecastPerCap]"
+                      name="ForecastPerCap"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[ForecastEligible]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[ForecastEligible]"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[ForecastEligible]"
+                      name="ForecastEligible"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[FiscalYear]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[FiscalYear]"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[FiscalYear]"
+                      name="FiscalYear"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[BudgetUnit]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[BudgetUnit]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[BudgetUnit]"
+                      name="BudgetUnit"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[AmountImpact]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[AmountImpact]"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[AmountImpact]"
+                      name="AmountImpact"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[Step]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[Step]"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[Step]"
+                      name="Step"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[StepID]"
+                      dataType="wstr"
+                      length="255"
+                      name="StepID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[ForMeg]"
+                      dataType="wstr"
+                      length="255"
+                      name="ForMeg" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[ForSvc]"
+                      dataType="wstr"
+                      length="255"
+                      name="ForSvc" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[ServiceMonth]"
+                      dataType="r8"
+                      name="ServiceMonth" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[FundType]"
+                      dataType="wstr"
+                      length="255"
+                      name="FundType" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[ForecastPerCap]"
+                      dataType="r8"
+                      name="ForecastPerCap" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[ForecastEligible]"
+                      dataType="r8"
+                      name="ForecastEligible" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[FiscalYear]"
+                      dataType="r8"
+                      name="FiscalYear" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[BudgetUnit]"
+                      dataType="wstr"
+                      length="255"
+                      name="BudgetUnit" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[AmountImpact]"
+                      dataType="r8"
+                      name="AmountImpact" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].ExternalColumns[Step]"
+                      dataType="r8"
+                      name="Step" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[StepID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[StepID]"
+                      name="StepID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[ForMeg]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[ForMeg]"
+                      name="ForMeg" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[ForSvc]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[ForSvc]"
+                      name="ForSvc" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[ServiceMonth]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[ServiceMonth]"
+                      name="ServiceMonth" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[FundType]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[FundType]"
+                      name="FundType" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[ForecastPerCap]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[ForecastPerCap]"
+                      name="ForecastPerCap" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[ForecastEligible]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[ForecastEligible]"
+                      name="ForecastEligible" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[FiscalYear]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[FiscalYear]"
+                      name="FiscalYear" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[BudgetUnit]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[BudgetUnit]"
+                      name="BudgetUnit" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[AmountImpact]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[AmountImpact]"
+                      name="AmountImpact" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[Step]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[Step]"
+                      name="Step" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\EarlierStep"
+              componentClassID="{8C084929-27D1-479F-9641-ABB7CDADF1AC}"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="EarlierStep"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">Step_fs$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\EarlierStep.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[EarlierStep]"
+                  connectionManagerRefId="Package.ConnectionManagers[EarlierStep]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[Name]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[Name]"
+                      name="Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[StepID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[StepID]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[StepID]"
+                      name="StepID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[ForMeg]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[ForMeg]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[ForMeg]"
+                      name="ForMeg"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[ForSvc]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[ForSvc]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[ForSvc]"
+                      name="ForSvc"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[ServiceMonth]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[ServiceMonth]"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[ServiceMonth]"
+                      name="ServiceMonth"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[FundType]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[FundType]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[FundType]"
+                      name="FundType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[ForecastPerCap]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[ForecastPerCap]"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[ForecastPerCap]"
+                      name="ForecastPerCap"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[ForecastEligible]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[ForecastEligible]"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[ForecastEligible]"
+                      name="ForecastEligible"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[FiscalYear]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[FiscalYear]"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[FiscalYear]"
+                      name="FiscalYear"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[BudgetUnit]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[BudgetUnit]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[BudgetUnit]"
+                      name="BudgetUnit"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[AmountImpact]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[AmountImpact]"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[AmountImpact]"
+                      name="AmountImpact"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[Step]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[Step]"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[Step]"
+                      name="Step"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[StepID]"
+                      dataType="wstr"
+                      length="255"
+                      name="StepID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[ForMeg]"
+                      dataType="wstr"
+                      length="255"
+                      name="ForMeg" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[ForSvc]"
+                      dataType="wstr"
+                      length="255"
+                      name="ForSvc" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[ServiceMonth]"
+                      dataType="r8"
+                      name="ServiceMonth" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[FundType]"
+                      dataType="wstr"
+                      length="255"
+                      name="FundType" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[ForecastPerCap]"
+                      dataType="r8"
+                      name="ForecastPerCap" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[ForecastEligible]"
+                      dataType="r8"
+                      name="ForecastEligible" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[FiscalYear]"
+                      dataType="r8"
+                      name="FiscalYear" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[BudgetUnit]"
+                      dataType="wstr"
+                      length="255"
+                      name="BudgetUnit" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[AmountImpact]"
+                      dataType="r8"
+                      name="AmountImpact" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].ExternalColumns[Step]"
+                      dataType="r8"
+                      name="Step" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[StepID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[StepID]"
+                      name="StepID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[ForMeg]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[ForMeg]"
+                      name="ForMeg" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[ForSvc]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[ForSvc]"
+                      name="ForSvc" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[ServiceMonth]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[ServiceMonth]"
+                      name="ServiceMonth" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[FundType]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[FundType]"
+                      name="FundType" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[ForecastPerCap]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[ForecastPerCap]"
+                      name="ForecastPerCap" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[ForecastEligible]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[ForecastEligible]"
+                      name="ForecastEligible" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[FiscalYear]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[FiscalYear]"
+                      name="FiscalYear" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[BudgetUnit]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[BudgetUnit]"
+                      name="BudgetUnit" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[AmountImpact]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[AmountImpact]"
+                      name="AmountImpact" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[Step]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[Step]"
+                      name="Step" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\zxg_CurStep"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="zxg_CurStep"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[zxg].[CurStep]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\zxg_CurStep.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MedicaidForecastServer]"
+                  connectionManagerRefId="Package.ConnectionManagers[MedicaidForecastServer]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Name"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].Columns[StepID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="StepID"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[StepID]"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[StepID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].Columns[ForMeg]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ForMeg"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[ForMeg]"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[ForMeg]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].Columns[ForSvc]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ForSvc"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[ForSvc]"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[ForSvc]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].Columns[ServiceMonth]"
+                      cachedDataType="r8"
+                      cachedName="ServiceMonth"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[ServiceMonth]"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[ServiceMonth]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].Columns[FundType]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="FundType"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[FundType]"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[FundType]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].Columns[ForecastPerCap]"
+                      cachedDataType="r8"
+                      cachedName="ForecastPerCap"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[ForecastPerCap]"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[ForecastPerCap]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].Columns[ForecastEligible]"
+                      cachedDataType="r8"
+                      cachedName="ForecastEligible"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[ForecastEligible]"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[ForecastEligible]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].Columns[FiscalYear]"
+                      cachedDataType="r8"
+                      cachedName="FiscalYear"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[FiscalYear]"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[FiscalYear]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].Columns[BudgetUnit]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="BudgetUnit"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[BudgetUnit]"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[BudgetUnit]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].Columns[AmountImpact]"
+                      cachedDataType="r8"
+                      cachedName="AmountImpact"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[AmountImpact]"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[AmountImpact]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].Columns[Step]"
+                      cachedDataType="r8"
+                      cachedName="Step"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[Step]"
+                      lineageId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output].Columns[Step]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[StepID]"
+                      dataType="wstr"
+                      length="255"
+                      name="StepID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[ForMeg]"
+                      dataType="wstr"
+                      length="255"
+                      name="ForMeg" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[ForSvc]"
+                      dataType="wstr"
+                      length="255"
+                      name="ForSvc" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[ServiceMonth]"
+                      dataType="r8"
+                      name="ServiceMonth" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[FundType]"
+                      dataType="wstr"
+                      length="255"
+                      name="FundType" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[ForecastPerCap]"
+                      dataType="r8"
+                      name="ForecastPerCap" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[ForecastEligible]"
+                      dataType="r8"
+                      name="ForecastEligible" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[FiscalYear]"
+                      dataType="r8"
+                      name="FiscalYear" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[BudgetUnit]"
+                      dataType="wstr"
+                      length="255"
+                      name="BudgetUnit" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[AmountImpact]"
+                      dataType="r8"
+                      name="AmountImpact" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input].ExternalColumns[Step]"
+                      dataType="r8"
+                      name="Step" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\zxg_CurStep.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\zxg_CurStep.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\zxg_CurStep.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\zxg_CurStep.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\zxg_EarStep"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="zxg_EarStep"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[zxg].[EarStep]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\zxg_EarStep.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MedicaidForecastServer]"
+                  connectionManagerRefId="Package.ConnectionManagers[MedicaidForecastServer]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Name"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].Columns[StepID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="StepID"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[StepID]"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[StepID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].Columns[ForMeg]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ForMeg"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[ForMeg]"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[ForMeg]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].Columns[ForSvc]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ForSvc"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[ForSvc]"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[ForSvc]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].Columns[ServiceMonth]"
+                      cachedDataType="r8"
+                      cachedName="ServiceMonth"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[ServiceMonth]"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[ServiceMonth]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].Columns[FundType]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="FundType"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[FundType]"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[FundType]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].Columns[ForecastPerCap]"
+                      cachedDataType="r8"
+                      cachedName="ForecastPerCap"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[ForecastPerCap]"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[ForecastPerCap]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].Columns[ForecastEligible]"
+                      cachedDataType="r8"
+                      cachedName="ForecastEligible"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[ForecastEligible]"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[ForecastEligible]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].Columns[FiscalYear]"
+                      cachedDataType="r8"
+                      cachedName="FiscalYear"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[FiscalYear]"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[FiscalYear]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].Columns[BudgetUnit]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="BudgetUnit"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[BudgetUnit]"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[BudgetUnit]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].Columns[AmountImpact]"
+                      cachedDataType="r8"
+                      cachedName="AmountImpact"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[AmountImpact]"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[AmountImpact]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].Columns[Step]"
+                      cachedDataType="r8"
+                      cachedName="Step"
+                      externalMetadataColumnId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[Step]"
+                      lineageId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output].Columns[Step]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[StepID]"
+                      dataType="wstr"
+                      length="255"
+                      name="StepID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[ForMeg]"
+                      dataType="wstr"
+                      length="255"
+                      name="ForMeg" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[ForSvc]"
+                      dataType="wstr"
+                      length="255"
+                      name="ForSvc" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[ServiceMonth]"
+                      dataType="r8"
+                      name="ServiceMonth" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[FundType]"
+                      dataType="wstr"
+                      length="255"
+                      name="FundType" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[ForecastPerCap]"
+                      dataType="r8"
+                      name="ForecastPerCap" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[ForecastEligible]"
+                      dataType="r8"
+                      name="ForecastEligible" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[FiscalYear]"
+                      dataType="r8"
+                      name="FiscalYear" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[BudgetUnit]"
+                      dataType="wstr"
+                      length="255"
+                      name="BudgetUnit" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[AmountImpact]"
+                      dataType="r8"
+                      name="AmountImpact" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input].ExternalColumns[Step]"
+                      dataType="r8"
+                      name="Step" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\zxg_EarStep.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\zxg_EarStep.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\zxg_EarStep.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\zxg_EarStep.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Excel Source Output]"
+              endId="Package\Data Flow Task\zxg_EarStep.Inputs[OLE DB Destination Input]"
+              name="Excel Source Output"
+              startId="Package\Data Flow Task\EarlierStep.Outputs[Excel Source Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Excel Source Output1]"
+              endId="Package\Data Flow Task\zxg_CurStep.Inputs[OLE DB Destination Input]"
+              name="Excel Source Output"
+              startId="Package\Data Flow Task\CurStep.Outputs[Excel Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Empty tables"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{68FA5151-8125-457F-9096-6213E7BE7E9A}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Empty tables"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{18174D63-709E-4294-80D1-EC1DA6DEC955}"
+          SQLTask:SqlStatementSource="truncate table zxg.CurStep&#xA;truncate table zxg.EarStep" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute usp_CompareCFCScrub"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{FF36F215-6CF9-499B-AD6F-865D799DDC7F}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute usp_CompareCFCScrub"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"exec zxg.usp_CompareCFCScrub  @prem ="+ @[User::pre] +", @curM = "+ @[User::cur]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{18174D63-709E-4294-80D1-EC1DA6DEC955}"
+          SQLTask:SqlStatementSource="exec zxg.usp_CompareCFCScrub  @prem =1912, @curM = 1914" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute usp_compareStepImpactOnPercap"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{9d2d7633-40fe-4aa0-9b64-53ce88ba3513}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute usp_compareStepImpactOnPercap"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="SqlStatementSource">"exec zxg.usp_compareStepImpactOnPercap  @stepVer ="+"'"+ @[User::ReleaseVersionWithStep]+"'"+" ,@WithoutStepVer  ="+"'"+ @[User::ReleaseVersionNoStep]+"'"+" ,@cycle ="+"'"+ @[User::Cycle]+"'"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{18174D63-709E-4294-80D1-EC1DA6DEC955}"
+          SQLTask:SqlStatementSource="exec zxg.usp_compareStepImpactOnPercap  @stepVer ='D06' ,@WithoutStepVer  ='A06' ,@cycle ='1905'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute usp_CurrentCycleVSLastCycle"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{A19B8034-75EC-4414-B344-54D292B51DBB}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute usp_CurrentCycleVSLastCycle"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{18174D63-709E-4294-80D1-EC1DA6DEC955}"
+          SQLTask:SqlStatementSource="exec zxg.usp_CurrentCycleVSLastCycle @pThisCycle_x = '1905',@pThisCycle_y = '1905',@pThisVersion_x = 'D06', @pThisVersion_y  = 'A06', @pThisStartFY ='2017',  @Month = 201607" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{8EA186E7-CFA3-43F7-A459-B9ECA52C7CD1}"
+      DTS:From="Package\Empty tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data Flow Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="18.5,107.5" />
+        <NodeLayout
+          Size="140,42"
+          Id="Package\Empty tables"
+          TopLeft="24,5.5" />
+        <NodeLayout
+          Size="229,42"
+          Id="Package\Execute usp_CompareCFCScrub"
+          TopLeft="318.5,25.5" />
+        <NodeLayout
+          Size="282,42"
+          Id="Package\Execute usp_compareStepImpactOnPercap"
+          TopLeft="307,208" />
+        <NodeLayout
+          Size="258,42"
+          Id="Package\Execute usp_CurrentCycleVSLastCycle"
+          TopLeft="316,319" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="94,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="138,42"
+          Id="Package\Data Flow Task\zxg_CurStep"
+          TopLeft="421,247" />
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Data Flow Task\EarlierStep"
+          TopLeft="129,57" />
+        <NodeLayout
+          Size="137,42"
+          Id="Package\Data Flow Task\zxg_EarStep"
+          TopLeft="133,242" />
+        <NodeLayout
+          Size="116,42"
+          Id="Package\Data Flow Task\CurStep"
+          TopLeft="420,64" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Excel Source Output1]"
+          TopLeft="478,106">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="12,141"
+              Start="0,0"
+              End="12,133.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,66.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,66.5"
+                    Point2="0,70.5"
+                    Point3="4,70.5" />
+                  <mssgle:LineSegment
+                    End="8,70.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8,70.5"
+                    Point2="12,70.5"
+                    Point3="12,74.5" />
+                  <mssgle:LineSegment
+                    End="12,133.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Excel Source Output]"
+          TopLeft="197.75,99">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,143"
+              Start="0,0"
+              End="0,135.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,135.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\zxg_CurStep">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\EarlierStep">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\zxg_EarStep">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\CurStep">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

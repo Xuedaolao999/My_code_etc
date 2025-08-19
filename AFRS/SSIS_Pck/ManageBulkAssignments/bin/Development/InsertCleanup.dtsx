@@ -1,0 +1,145 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/26/2008 2:08:55 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="DSHSMAA-Z073160"
+  DTS:CreatorName="DSHS\robine"
+  DTS:DTSID="{BF0B1582-DB0E-43F5-9326-56578C62C582}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5569.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="InsertCleanup"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{7BEC3EE9-B940-49F7-98B5-7749A8D9E97A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[HCADBOLY206.Forecast]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{4979F52E-5438-4966-A5FB-2C6EC80CD3AC}"
+      DTS:ObjectName="HCADBOLY206.Forecast">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=HCADBOLY206;Initial Catalog=Forecast;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Change the AFRS_xWalk MonthlyAssignments_flag to 1 or true for the any &quot;Bulk Assignments&quot;  xWalk Assignments"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="update afrs_xWalk&#xA;set MonthlyAssignment_flag ='1'&#xA;where MonthlyAssignment_flag = '0'&#xA;and CreateBy = 'Bulk Assignments'"
+      DTS:DTSID="{9B9D8374-C010-4E83-BA70-FE58B0FB8F97}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Change the AFRS_xWalk MonthlyAssignments_flag to 1 or true for the any &quot;Bulk Assignments&quot;  xWalk Assignments"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4979F52E-5438-4966-A5FB-2C6EC80CD3AC}"
+          SQLTask:SqlStatementSource="update afrs_xWalk&#xA;set MonthlyAssignment_flag ='1'&#xA;where MonthlyAssignment_flag = '0'&#xA;and CreateBy = 'Bulk Assignments'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Delete rows in  BulkAssignment and BulkAssignment_xWalk_Ids tables since they have already been added"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="truncate table BulkAssignments&#xA;GO&#xA;truncate table BulkAssignments_xWalk_ids&#xA;GO"
+      DTS:DTSID="{1799DC3E-8F01-4E9A-A707-7E4CC3AD1DA7}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete rows in  BulkAssignment and BulkAssignment_xWalk_Ids tables since they have already been added"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4979F52E-5438-4966-A5FB-2C6EC80CD3AC}"
+          SQLTask:SqlStatementSource="truncate table BulkAssignments&#xA;GO&#xA;truncate table BulkAssignments_xWalk_ids&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{2D518470-EFFB-4372-910B-277AD3A232EC}"
+      DTS:From="Package\Delete rows in  BulkAssignment and BulkAssignment_xWalk_Ids tables since they have already been added"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Change the AFRS_xWalk MonthlyAssignments_flag to 1 or true for the any &quot;Bulk Assignments&quot;  xWalk Assignments" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <NodeLayout
+          Size="328,70"
+          Id="Package\Change the AFRS_xWalk MonthlyAssignments_flag to 1 or true for the any &quot;Bulk Assignments&quot;  xWalk Assignments"
+          TopLeft="11.5,140.066037735849" />
+        <NodeLayout
+          Size="224,74"
+          Id="Package\Delete rows in  BulkAssignment and BulkAssignment_xWalk_Ids tables since they have already been added"
+          TopLeft="5.5,24.2547169811321" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="117.311320754717,98.1415094339623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="58.4150943396226,41.9245283018868"
+              Start="0,0"
+              End="58.4150943396226,34.4245283018868">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.9433962264151" />
+                  <mssgle:LineSegment
+                    End="58.4150943396226,20.9433962264151" />
+                  <mssgle:LineSegment
+                    End="58.4150943396226,34.4245283018868" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="CleanUp"
+          ParentId="Package"
+          Size="226,40"
+          Id="1374742e-3ec4-4d67-809b-a51268cf93dd"
+          TopLeft="175.424528301887,5.5">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="11.25"
+              Color="#FF080000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

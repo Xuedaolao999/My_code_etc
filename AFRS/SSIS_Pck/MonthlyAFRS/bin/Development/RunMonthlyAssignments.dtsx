@@ -1,0 +1,473 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/29/2008 2:05:59 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="DSHSMAA-Z073160"
+  DTS:CreatorName="DSHS\robine"
+  DTS:DTSID="{C7021D52-C5F8-4DDA-8255-59BAB854AB26}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="13.0.2150.2"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="RunMonthlyAssignments"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:SuppressConfigurationWarnings="True"
+  DTS:VersionBuild="85"
+  DTS:VersionGUID="{0438E420-7DDF-45A8-808C-33C69B4824BA}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AFRSDownload.dtsx]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{4A401CC5-CC08-4A20-9BEC-6F4328CC2016}"
+      DTS:ObjectName="AFRSDownload.dtsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="\\dshsfloly7002\JDrive\Forecast Unit\AFRS_MEXP_7205\SSIS\MonthlyAFRS\MonthlyAFRS\AFRSDownload.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AFRSDownloadFromDSHS.dtsx]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{DEAAD29B-7790-4163-90C8-3C3940BC49A2}"
+      DTS:ObjectName="AFRSDownloadFromDSHS.dtsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="J:\Forecast Unit\AFRS_MEXP_7205\SSIS_2012\MonthlyAFRS\MonthlyAFRS\AFRSDownloadFromDSHS.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AFRSDownloadFromDSHS.dtsx 1]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{5D6AADA1-E5B5-4C86-883A-9112123C2C8E}"
+      DTS:ObjectName="AFRSDownloadFromDSHS.dtsx 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="J:\Forecast Unit\AFRS_MEXP_7205\SSIS_2012\MonthlyAFRS\MonthlyAFRS\AFRSDownloadFromDSHS.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AFRSDownloadFromDSHS.dtsx 2]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{187732F6-EF9F-4EE4-A103-AC651D37D6D5}"
+      DTS:ObjectName="AFRSDownloadFromDSHS.dtsx 2">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="\\homedirs.eclient.wa.lcl\ofmhome$\XingguoZ\Docu\ForecastDocu\AFRS\TestingPackage\MonthlyAFRS\AFRSDownloadFromDSHS.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AFRSDownloadFromDSHSToAFRSandAFRS_Raw.dtsx]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{D9B89D36-33D5-48C7-8F27-FB0C455BA9EB}"
+      DTS:ObjectName="AFRSDownloadFromDSHSToAFRSandAFRS_Raw.dtsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="J:\Forecast Unit\AFRS_MEXP_7205\SSIS_2012\MonthlyAFRS\MonthlyAFRS\AFRSDownloadFromDSHSToAFRSandAFRS_Raw.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AFRSDownloadFromDSHSToAFRSandAFRS_Raw.dtsx 1]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{69D3E271-4525-4F3E-B258-F917DF15698F}"
+      DTS:ObjectName="AFRSDownloadFromDSHSToAFRSandAFRS_Raw.dtsx 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="\\homedirs.eclient.wa.lcl\ofmhome$\XingguoZ\Docu\ForecastDocu\AFRS\TestingPackage\MonthlyAFRS\AFRSDownloadFromDSHSToAFRSandAFRS_Raw.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Assignments.dtsx]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{0E3A2E2A-4D6D-45D9-BA0D-1FE44DAFF765}"
+      DTS:ObjectName="Assignments.dtsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="\\homedirs.eclient.wa.lcl\ofmhome$\XingguoZ\Docu\ForecastDocu\AFRS\TestingPackage\MonthlyAFRS\Assignments.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Assignments.dtsx 1]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{FC848684-0608-46C6-B787-ED64A3EED774}"
+      DTS:ObjectName="Assignments.dtsx 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="J:\Forecast Unit\AFRS_MEXP_7205\SSIS_2012\MonthlyAFRS\MonthlyAFRS\Assignments.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DSHSDBOLY7206.Forecast]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2E95AFA9-ABC7-4208-8A92-D607FE86A3D1}"
+      DTS:ObjectName="DSHSDBOLY7206.Forecast">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=HCADBOLY206;Initial Catalog=Forecast;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[RefreshTotalTransactions.dtsx]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{96E8D923-D044-4B21-9D8F-650C9AB30143}"
+      DTS:ObjectName="RefreshTotalTransactions.dtsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="J:\Forecast Unit\AFRS_MEXP_7205\SSIS_2012\MonthlyAFRS\MonthlyAFRS\RefreshTotalTransactions.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[RefreshTotalTransactions.dtsx 1]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{4277126F-DBC9-4871-8840-B3EF4A95BEFE}"
+      DTS:ObjectName="RefreshTotalTransactions.dtsx 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="\\homedirs.eclient.wa.lcl\ofmhome$\XingguoZ\Docu\ForecastDocu\AFRS\TestingPackage\MonthlyAFRS\RefreshTotalTransactions.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[UnassignedToExcel.dtsx]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{0B416703-31C0-4F8E-96F8-32184722C7D6}"
+      DTS:ObjectName="UnassignedToExcel.dtsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="J:\Forecast Unit\AFRS_MEXP_7205\SSIS_2012\MonthlyAFRS\MonthlyAFRS\UnassignedToExcel.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[UnassignedToExcel.dtsx 1]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{1B4D4153-D764-45FF-841B-4C3176F68CF0}"
+      DTS:ObjectName="UnassignedToExcel.dtsx 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="\\homedirs.eclient.wa.lcl\ofmhome$\XingguoZ\Docu\ForecastDocu\AFRS\TestingPackage\MonthlyAFRS\UnassignedToExcel.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Assign new records to xWalk (Assignments)_zxg"
+      DTS:CreationName="SSIS.ExecutePackageTask.3"
+      DTS:Description="Add assignment_id and xWalk_id to new OFM records"
+      DTS:DTSID="{17748036-0464-43F4-B55B-825E5F15098B}"
+      DTS:ExecutableType="SSIS.ExecutePackageTask.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Assign new records to xWalk (Assignments)_zxg"
+      DTS:TaskContact="Executes DTS packages;Microsoft Corporation; Microsoft SQL Server v9; (C) 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <Connection>{0E3A2E2A-4D6D-45D9-BA0D-1FE44DAFF765}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Download Monthly OFM Data (AFRSDownloadFromDSHS _zxg)"
+      DTS:CreationName="SSIS.ExecutePackageTask.3"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{9743D951-F9FE-413E-9CA7-F59B93F3F83A}"
+      DTS:ExecutableType="SSIS.ExecutePackageTask.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Download Monthly OFM Data (AFRSDownloadFromDSHS _zxg)"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <Connection>{187732F6-EF9F-4EE4-A103-AC651D37D6D5}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Download to AFRS and AFRS_Raw (AFRSDownloadFromDSHSToAFRSandAFRS_Raw_zxg)"
+      DTS:CreationName="SSIS.ExecutePackageTask.3"
+      DTS:Description="Download the new monthly data to AFRS and AFRS_Raw tables"
+      DTS:Disabled="True"
+      DTS:DTSID="{14331789-4469-4bdc-b518-ff8f74616a1f}"
+      DTS:ExecutableType="SSIS.ExecutePackageTask.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Download to AFRS and AFRS_Raw (AFRSDownloadFromDSHSToAFRSandAFRS_Raw_zxg)"
+      DTS:TaskContact="Executes DTS packages;Microsoft Corporation; Microsoft SQL Server v9; (C) 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <Connection>{69D3E271-4525-4F3E-B258-F917DF15698F}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Place unassigned rows into Bulk Assignments spreadsheet (UnassignedToExcel)_zxg"
+      DTS:CreationName="SSIS.ExecutePackageTask.3"
+      DTS:Description="So that Monte can use that process to add xWalks"
+      DTS:DTSID="{222472C0-E561-47F6-99FF-26F2782F70F5}"
+      DTS:ExecutableType="SSIS.ExecutePackageTask.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Place unassigned rows into Bulk Assignments spreadsheet (UnassignedToExcel)_zxg"
+      DTS:TaskContact="Executes DTS packages;Microsoft Corporation; Microsoft SQL Server v9; (C) 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <Connection>{1B4D4153-D764-45FF-841B-4C3176F68CF0}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Refresh the Meg and Svc Total Transactions Tables (RefreshTotalTransactions) and the ARRA table and run other stored procedures_zxg"
+      DTS:CreationName="SSIS.ExecutePackageTask.3"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{18A36099-CECF-4608-BDC9-861297272111}"
+      DTS:ExecutableType="SSIS.ExecutePackageTask.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Refresh the Meg and Svc Total Transactions Tables (RefreshTotalTransactions) and the ARRA table and run other stored procedures_zxg"
+      DTS:TaskContact="Executes DTS packages;Microsoft Corporation; Microsoft SQL Server v9; (C) 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <Connection>{4277126F-DBC9-4871-8840-B3EF4A95BEFE}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{3FE7426F-E992-4608-9915-E1226BC3AF5B}"
+      DTS:From="Package\Download Monthly OFM Data (AFRSDownloadFromDSHS _zxg)"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Assign new records to xWalk (Assignments)_zxg" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{EE92C1AD-8747-4D0A-B9F0-6B1824BCE0C9}"
+      DTS:From="Package\Assign new records to xWalk (Assignments)_zxg"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Place unassigned rows into Bulk Assignments spreadsheet (UnassignedToExcel)_zxg" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{15DE3A7E-E0AA-472C-B3A0-6178E139B228}"
+      DTS:From="Package\Place unassigned rows into Bulk Assignments spreadsheet (UnassignedToExcel)_zxg"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Refresh the Meg and Svc Total Transactions Tables (RefreshTotalTransactions) and the ARRA table and run other stored procedures_zxg" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <NodeLayout
+          Size="309,42"
+          Id="Package\Assign new records to xWalk (Assignments)_zxg"
+          TopLeft="109.651772736084,233.432519431443" />
+        <NodeLayout
+          Size="376,42"
+          Id="Package\Download Monthly OFM Data (AFRSDownloadFromDSHS _zxg)"
+          TopLeft="81.0198000974026,115.341714248702" />
+        <NodeLayout
+          Size="502,42"
+          Id="Package\Download to AFRS and AFRS_Raw (AFRSDownloadFromDSHSToAFRSandAFRS_Raw_zxg)"
+          TopLeft="540.769230769231,152.307692307692" />
+        <NodeLayout
+          Size="478,42"
+          Id="Package\Place unassigned rows into Bulk Assignments spreadsheet (UnassignedToExcel)_zxg"
+          TopLeft="43.7197803073626,376.855621992827" />
+        <NodeLayout
+          Size="726,42"
+          Id="Package\Refresh the Meg and Svc Total Transactions Tables (RefreshTotalTransactions) and the ARRA table and run other stored procedures_zxg"
+          TopLeft="47.366473149492,494.024681985869" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="266.585786416743,157.341714248702">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,76.090805182741"
+              Start="0,0"
+              End="0,68.590805182741">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,68.590805182741" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="264.151772736084,275.432519431443">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="18.5680075712786,101.423102561384"
+              Start="0,0"
+              End="18.5680075712786,93.923102561384">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.711551280692" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,46.711551280692"
+                    Point2="0,50.711551280692"
+                    Point3="4,50.711551280692" />
+                  <mssgle:LineSegment
+                    End="14.5680075712786,50.711551280692" />
+                  <mssgle:CubicBezierSegment
+                    Point1="14.5680075712786,50.711551280692"
+                    Point2="18.5680075712786,50.711551280692"
+                    Point3="18.5680075712786,54.711551280692" />
+                  <mssgle:LineSegment
+                    End="18.5680075712786,93.923102561384" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="282.719780307363,418.855621992827">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="127.646692842129,75.1690599930421"
+              Start="0,0"
+              End="127.646692842129,67.6690599930421">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5845299965211" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.5845299965211"
+                    Point2="0,37.5845299965211"
+                    Point3="4,37.5845299965211" />
+                  <mssgle:LineSegment
+                    End="123.646692842129,37.5845299965211" />
+                  <mssgle:CubicBezierSegment
+                    Point1="123.646692842129,37.5845299965211"
+                    Point2="127.646692842129,37.5845299965211"
+                    Point3="127.646692842129,41.5845299965211" />
+                  <mssgle:LineSegment
+                    End="127.646692842129,67.6690599930421" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="j:\Forecast Unit\AFRS_MEXP_7205\SSIS\MonthlyAFRS"
+          ParentId="Package"
+          Size="299,40"
+          Id="fd904bbd-883c-4e92-8f5f-93b79261c213"
+          TopLeft="17.2735849056604,7.65022625292365">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="11.25"
+              Color="#FF080000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="RunMonthlyAssignments.dtsx"
+          ParentId="Package"
+          Size="153,53"
+          Id="16cbd9a3-a3a4-4825-9ffc-6c0fd87c73df"
+          TopLeft="49.0148243307379,63.7767518631673">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="11.25"
+              Color="#FF080000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="This is the step (Assignments) that you run&#xA;twice, first when you initially run the monthly&#xA;process, and the second time after inserting&#xA;your new bulk assignments. See the last step, &#xA;REFRESH TOTAL TRANSACTIONS, which needs&#xA;to be rerun as well after all of the rows have&#xA;been successfully loaded into AFRS_Extract. "
+          ParentId="Package"
+          Size="353,121"
+          Id="1b2ee242-5fcb-4760-8dc5-fc42dee44d4c"
+          TopLeft="588.16000267736,205.430469825482">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="11.25"
+              Color="#FF080000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="You can run through this whole process and&#xA;get everything you need EXCEPT the new&#xA;assignments. For that you need to go to the&#xA;SSIS ap &quot; ManageBulkAssignments&quot;. Once&#xA;you have run that, you need to come back &#xA;and run &quot;Assignments&quot; again. This time all&#xA;AFRS rows should be processed through.&#xA;"
+          ParentId="Package"
+          Size="288,135"
+          Id="1d476b81-6bba-4de3-bb5f-a307a39a8365"
+          TopLeft="580.024817828334,6.19546610371242">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="11.25"
+              Color="#FF080000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="This step needs to be run AFTER all of the rows have&#xA;been added to AFRS_Extract."
+          ParentId="Package"
+          Size="226,67"
+          Id="78f537be-c317-41a5-bef3-79c6fef37bb8"
+          TopLeft="808.414368650217,494.490574583838">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="11.25"
+              Color="#FF080000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

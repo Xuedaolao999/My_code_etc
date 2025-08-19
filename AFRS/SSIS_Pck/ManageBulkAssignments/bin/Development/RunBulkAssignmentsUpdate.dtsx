@@ -1,0 +1,290 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/13/2008 11:50:53 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="DSHSMAA-Z073160"
+  DTS:CreatorName="DSHS\robine"
+  DTS:DTSID="{77939A59-E718-4997-8407-3B092595E7EE}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.5569.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="RunBulkAssignmentsUpdate"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="31"
+  DTS:VersionGUID="{C82FEAFC-A457-4F79-A0D5-0846700981E7}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[HCADBOLY206.Forecast]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{687B81A2-5B52-4E80-AA4C-71FFEBDDE4B4}"
+      DTS:ObjectName="HCADBOLY206.Forecast">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=HCADBOLY206;Initial Catalog=Forecast;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[UpdateCleanup.dtsx]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{5371A175-F6E4-4CD3-B9E2-2C442F78D36F}"
+      DTS:ObjectName="UpdateCleanup.dtsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="\\dshsfloly7002\JDrive\Forecast Unit\AFRS_MEXP_7205\SSIS_2012\ManageBulkAssignments\ManageBulkAssignments\UpdateCleanup.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[UpdateLookupSchemeIds.dtsx]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{4BF52BB3-E204-4D37-87FB-FB547FFDBC3A}"
+      DTS:ObjectName="UpdateLookupSchemeIds.dtsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="\\dshsfloly7002\JDrive\Forecast Unit\AFRS_MEXP_7205\SSIS_2012\ManageBulkAssignments\ManageBulkAssignments\UpdateLookupSchemeIds.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Clean Up after the Updates to the Bulk Assignments"
+      DTS:CreationName="SSIS.ExecutePackageTask.3"
+      DTS:Description="Clean Up tables"
+      DTS:DTSID="{495EED25-735C-4BF9-B704-01B0F5503A74}"
+      DTS:ExecutableType="SSIS.ExecutePackageTask.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Clean Up after the Updates to the Bulk Assignments"
+      DTS:TaskContact="Executes DTS packages;Microsoft Corporation; Microsoft SQL Server v9; (C) 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <Connection>{5371A175-F6E4-4CD3-B9E2-2C442F78D36F}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Lookup MEG, SVC, and SOF Ids"
+      DTS:CreationName="SSIS.ExecutePackageTask.3"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{58419525-B592-4EAA-BE9D-22367C1E962A}"
+      DTS:ExecutableType="SSIS.ExecutePackageTask.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Lookup MEG, SVC, and SOF Ids"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <Connection>{4BF52BB3-E204-4D37-87FB-FB547FFDBC3A}</Connection>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update Bulk Assignments for Scheme A"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Update the ids in the schemes for each assignment"
+      DTS:DTSID="{C85EBCBD-040D-4DA9-B9D5-3ADEB792311C}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update Bulk Assignments for Scheme A"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{687B81A2-5B52-4E80-AA4C-71FFEBDDE4B4}"
+          SQLTask:SqlStatementSource="update AFRS_Scheme&#xA;set AFRS_Scheme.afrs_meg_id = (select afrs_meg_id_A &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;from bulkAssignments&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;where bulkAssignments.AFRS_MonthlyAssignmentxWalk_Id =  AFRS_Scheme.afrs_xwalk_id),&#xA;&#xA;AFRS_Scheme.afrs_svc_id = (select afrs_svc_id_A &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;           from bulkAssignments&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;           where bulkAssignments.AFRS_MonthlyAssignmentxWalk_Id =  AFRS_Scheme.afrs_xwalk_id),&#xA;&#xA;AFRS_Scheme.afrs_sof_id = (select afrs_sof_id_A &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;          from bulkAssignments&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;          where bulkAssignments.AFRS_MonthlyAssignmentxWalk_Id =  AFRS_Scheme.afrs_xwalk_id),&#xA;&#xA;AFRS_Scheme.createby = (select createby &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;      from bulkAssignments&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;      where bulkAssignments.AFRS_MonthlyAssignmentxWalk_Id = AFRS_Scheme.afrs_xwalk_id),&#xA;&#xA;AFRS_Scheme.ModifiedDate = (select createDate &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;          from bulkAssignments&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;          where bulkAssignments.AFRS_MonthlyAssignmentxWalk_Id = AFRS_Scheme.afrs_xwalk_id)&#xA;&#xA;where scheme = 'A'&#xA;and AFRS_Scheme.EndFcCycle = '9999'&#xA;and AFRS_Scheme.afrs_xwalk_id in (select AFRS_MonthlyAssignmentxWalk_Id&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;      from bulkAssignments)&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update Bulk Assignments for Scheme B"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{807C54B2-228A-4C41-A8A2-4C8FAB83562A}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update Bulk Assignments for Scheme B"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{687B81A2-5B52-4E80-AA4C-71FFEBDDE4B4}"
+          SQLTask:SqlStatementSource="update AFRS_Scheme&#xA;set AFRS_Scheme.afrs_meg_id = (select afrs_meg_id_B &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;from bulkAssignments&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;where bulkAssignments.AFRS_MonthlyAssignmentxWalk_Id =  AFRS_Scheme.afrs_xwalk_id),&#xA;&#xA;AFRS_Scheme.afrs_svc_id = (select afrs_svc_id_B &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;           from bulkAssignments&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;           where bulkAssignments.AFRS_MonthlyAssignmentxWalk_Id =  AFRS_Scheme.afrs_xwalk_id),&#xA;&#xA;AFRS_Scheme.afrs_sof_id = (select afrs_sof_id_B &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;          from bulkAssignments&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;          where bulkAssignments.AFRS_MonthlyAssignmentxWalk_Id =  AFRS_Scheme.afrs_xwalk_id),&#xA;&#xA;AFRS_Scheme.createby = (select createby &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;      from bulkAssignments&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;      where bulkAssignments.AFRS_MonthlyAssignmentxWalk_Id = AFRS_Scheme.afrs_xwalk_id),&#xA;&#xA;AFRS_Scheme.ModifiedDate = (select createDate &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;          from bulkAssignments&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;          where bulkAssignments.AFRS_MonthlyAssignmentxWalk_Id = AFRS_Scheme.afrs_xwalk_id)&#xA;&#xA;where scheme = 'B'&#xA;and AFRS_Scheme.EndFcCycle = '9999'&#xA;and AFRS_Scheme.afrs_xwalk_id in (select AFRS_MonthlyAssignmentxWalk_Id&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;      from bulkAssignments)&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{15532D88-3153-4389-9DB1-F7C9DDD0160F}"
+      DTS:From="Package\Lookup MEG, SVC, and SOF Ids"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Update Bulk Assignments for Scheme A" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{D9BCDA2E-424D-4B76-BCC0-6E907A05AAD5}"
+      DTS:From="Package\Update Bulk Assignments for Scheme A"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Update Bulk Assignments for Scheme B" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{5A356E22-439C-4B45-92BB-748C5FF5AFE5}"
+      DTS:From="Package\Update Bulk Assignments for Scheme B"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Clean Up after the Updates to the Bulk Assignments" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <NodeLayout
+          Size="241,44"
+          Id="Package\Clean Up after the Updates to the Bulk Assignments"
+          TopLeft="5.5,235.877358490566" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Lookup MEG, SVC, and SOF Ids"
+          TopLeft="92.5566037735849,32.8962264150943" />
+        <NodeLayout
+          Size="238,44"
+          Id="Package\Update Bulk Assignments for Scheme A"
+          TopLeft="21.4622641509434,105.084905660377" />
+        <NodeLayout
+          Size="245,44"
+          Id="Package\Update Bulk Assignments for Scheme B"
+          TopLeft="21.4622641509434,169.990566037736" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="160.443396226415,76.8207547169811">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-20.188679245283,28.2641509433962"
+              Start="0,0"
+              End="-20.188679245283,20.7641509433962">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.1132075471698" />
+                  <mssgle:LineSegment
+                    End="-20.188679245283,14.1132075471698" />
+                  <mssgle:LineSegment
+                    End="-20.188679245283,20.7641509433962" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="140.254716981132,149.009433962264">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="3.50943396226415,20.9811320754717"
+              Start="0,0"
+              End="3.50943396226415,13.4811320754717">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.4905660377359" />
+                  <mssgle:LineSegment
+                    End="3.50943396226415,10.4905660377359" />
+                  <mssgle:LineSegment
+                    End="3.50943396226415,13.4811320754717" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="143.764150943396,213.915094339623">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-17.9622641509434,21.9622641509434"
+              Start="0,0"
+              End="-17.9622641509434,14.4622641509434">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.9811320754717" />
+                  <mssgle:LineSegment
+                    End="-17.9622641509434,10.9811320754717" />
+                  <mssgle:LineSegment
+                    End="-17.9622641509434,14.4622641509434" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Update Bulk Assignments"
+          ParentId="Package"
+          Size="226,40"
+          Id="378c2063-d95d-4f1c-9f92-5029da820b5e"
+          TopLeft="140.292452830189,5.5">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="11.25"
+              Color="#FF080000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="There is documentation for this process in documentation.doc in &#xD;&#xA;J:Forecast Unit/AFRS_MEXP_7205/SSIS_2008/ManageBulkAssignments"
+          ParentId="Package"
+          Size="332,80"
+          Id="d926ed34-9199-4780-b32f-9fbee406afc8"
+          TopLeft="302.028301886792,54.4056603773585">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="11.25"
+              Color="#FF080000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
